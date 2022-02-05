@@ -1,0 +1,15 @@
+<svg width="100" height="53" xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve">
+ <!-- <polygon class="st0" points="41.8,47.7 57.8,36.5 58.7,37.7 68.8,52 57.3,38.4 "/> -->
+
+ <!-- <polygon class="st0" points="74.4,20.1 59.2,30.8 58.3,29.5 48.2,15.3 59.6,28.9 "/> -->
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="svg_6">
+   <polygon stroke="null" class="st0" points="47.064510345458984,8.271805480122566 57.15009307861328,22.546801283955574 54.512325286865234,24.40875692665577 25.186559677124023,45.04539938271046 53.27102279663086,21.61583013832569 " fill="#1A1A1A" id="svg_1"/>
+   <polygon stroke="null" class="st0" points="68.32731628417969,36.6919676810503 58.241634368896484,22.416992858052254 60.879398345947266,20.55504484474659 90.20526123046875,-0.08161093294620514 62.27586364746094,23.503136351704597 " fill="#1A1A1A" id="svg_2"/>
+   <text stroke="null" transform="matrix(1.06473 0 0 1.55163 23.679 73.3227)" class="st1 st2" font-style="italic" font-family="'Consolas'" font-size="29.1091px" id="svg_3" y="-23.6946" x="-22.03682">NE</text>
+   <text stroke="null" transform="matrix(1.48786 0 0 1.55163 60.8217 85.0805)" class="st3 st4" font-style="italic" font-family="'Consolas'" font-size="9.5642px" id="svg_4" y="-21.55452" x="-13.94378">notes</text>
+   <text stroke="null" transform="matrix(1.06473 0 0 1.55163 111.369 73.4151)" class="st1 st2" font-style="italic" font-family="'Consolas'" font-size="29.1091px" id="svg_5" y="-23.47066" x="-27.99077">T</text>
+  </g>
+ </g>
+</svg>

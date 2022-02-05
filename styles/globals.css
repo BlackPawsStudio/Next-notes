@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: consolas;
+}
+*:focus,
+button:focus {
+  outline: none;
+  border-width: 2px;
+  border-color: #111;
+}
+*::-webkit-scrollbar {
+  cursor: pointer;
+  width: 7px;
+  background-color: #ffffff70;
+}
+*::-webkit-scrollbar-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 20px;
+  background-color: #00000070;
+  cursor: pointer;
+}
+*:active::-webkit-slider-thumb {
+  background-color: #aaa;
+}
