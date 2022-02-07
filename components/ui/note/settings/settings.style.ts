@@ -44,7 +44,13 @@ export const InputLabel = styled.div<{ isColor }>`
   }
 `;
 
-export const InputLabelText = styled.label`
+export const InputLabelText = styled.label.attrs(
+  ({ color }) => ({
+    style: {
+      color: color
+    },
+  })
+)`
   text-align: center;
 `;
 

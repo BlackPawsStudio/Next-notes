@@ -5,8 +5,8 @@ export const Container = styled.div`
   align-items: center;
   row-gap: 7%;
   flex-direction: column;
-  margin-top: 7%;
-`
+  margin-top: 3%;
+`;
 
 export const Title = styled.p`
   font-size: calc(5vh + 2vw);
@@ -17,54 +17,77 @@ export const Title = styled.p`
   padding: 0 10%;
 `;
 
-export const Content = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;  
-  padding-bottom: 7%;
-`;
-
-type PreferenceColorProps = {
-  backColor?: string,
-  foreColor?: string
-}
-
-export const PreferenceSection = styled.div.attrs<PreferenceColorProps>(
+export const Content = styled.div.attrs<PreferenceColorProps>(
   ({ backColor, foreColor }) => ({
     style: {
       background: backColor,
-      color: foreColor
+      color: foreColor,
     },
   })
-) <PreferenceColorProps>`
-  width: 300px;
-  height: 50vh;
+)<PreferenceColorProps>`
   box-shadow: 10px 10px #111;
-  display: flex; 
+  height: 50vh;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 3%;
+`;
+
+type PreferenceColorProps = {
+  backColor?: string;
+  foreColor?: string;
+};
+
+export const PreferenceSection = styled.div.attrs(({ color }) => ({
+  style: {
+    color: color,
+  },
+}))`
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5vh;
   flex-direction: column;
-  padding: 10% 0;
 `;
 
 export const PreferenceText = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  row-gap: 2vh;
-`
-
-export const PreferenceTitle = styled.p`
-
+  row-gap: 1vh;
 `;
 
-export const PreferenceTextInput = styled.input`
-  width: 100%;
-`
+export const PreferenceTitle = styled.p``;
 
-export const PreferenceTextarea = styled.textarea`
+export const PreferenceTextInput = styled.input.attrs<PreferenceColorProps>(
+  ({ foreColor }) => ({
+    style: {
+      color: foreColor,
+    },
+  })
+)<PreferenceColorProps>`
+  width: 100%;
+  height: 35px;
+  padding: 10px;
+  box-shadow: 3px 3px #111;
+  border: 1px solid #111111;
+  background: #ffffff55;
+`;
+
+export const PreferenceTextarea = styled.textarea.attrs<PreferenceColorProps>(
+  ({ foreColor }) => ({
+    style: {
+      color: foreColor,
+    },
+  })
+)<PreferenceColorProps>`
   width: 100%;
   resize: none;
-  height: 50px;
-`
+  height: 20vh;
+  padding: 10px;
+  box-shadow: 3px 3px #111;
+  border: 1px solid #111111;
+  background: #ffffff55;
+`;

@@ -1,52 +1,35 @@
 import {
   Container,
   Content,
-  PreferenceSection,
-  PreferenceText,
-  PreferenceTextarea,
-  PreferenceTextInput,
-  PreferenceTitle,
   Title,
 } from "../components/pagesStyles/preferences.style";
-import { Color, InputLabel, InputLabelText } from "../components/ui/note/settings/settings.style";
+import MediaSetup from "../components/preferences/mediaSetup";
+import TextSetup from "../components/preferences/textSetup";
+import { useAppSelector } from "../redux/hooks";
 
 const PreferencesPage = () => {
+
+  const { backColor, foreColor, title, text } = useAppSelector(
+    ({ prefsSlice: toolkit }) => {
+      return {
+        backColor: toolkit.backColor,
+        foreColor: toolkit.foreColor,
+        title: toolkit.title,
+        text: toolkit.text,
+      };
+    }
+  );
+
   return (
     <Container>
       <Title>Set up your default note</Title>
-      <Content>
-        <PreferenceSection backColor={"#aaaaaa"} foreColor={"#111111"}>
-          <InputLabel isColor={true}>
-            <InputLabelText>Set default background color</InputLabelText>
-            <Color
-              editting={true}
-              disabled={false}
-              type="color"
-              defaultValue={"#aaaaaa"}
-            />
-          </InputLabel>
-
-          <InputLabel isColor={true}>
-            <InputLabelText>Set default text color</InputLabelText>
-            <Color
-              editting={true}
-              disabled={false}
-              type="color"
-              defaultValue={"#111111"}
-            />
-          </InputLabel>
-        </PreferenceSection>
-
-        <PreferenceSection backColor={"#aaaaaa"}>
-          <PreferenceText>
-            <PreferenceTitle>Set default note title</PreferenceTitle>
-            <PreferenceTextInput />
-          </PreferenceText>
-          <PreferenceText>
-            <PreferenceTitle>Set default note text</PreferenceTitle>
-            <PreferenceTextarea spellCheck={false}  />
-          </PreferenceText>
-        </PreferenceSection>
+      <Content onMouseLeave={() => {}} backColor={backColor}>
+        <MediaSetup foreColor={foreColor} />
+        <TextSetup
+          foreColor={foreColor}
+          title={title}
+          text={text}
+        />
       </Content>
     </Container>
   );

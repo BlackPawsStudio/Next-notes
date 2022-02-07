@@ -1,34 +1,48 @@
 {
-  "notes": {
+  "users" : {
     "0": {
-      "title": "Note title",
-      "backColor": "#aaaaaa",
-      "foreColor": "#111111",
-      "date": "2022-01-28",
-      "time": "00:00",
-      "willRemind": false,
-      "text": "Write here!",
-      "id": 0
-    },
-    "1": {
-      "title": "Zhopa",
-      "backColor": "#aabbbb",
-      "foreColor": "#000000",
-      "date": "2022-01-28",
-      "time": "01:02",
-      "willRemind": false,
-      "text": "Ochko",
-      "id": 1
-    },
-    "2": {
-      "title": "Hoba",
-      "backColor": "#000000",
-      "foreColor": "#ffffff",
-      "date": "2022-01-28",
-      "time": "00:00",
-      "willRemind": true,
-      "text": "popochka :3",
-      "id": 2
-    }
+      "id": 0,
+      "login": "admin",
+      "password": "password",
+      "prefs": {
+        "title": "Note title",
+        "backColor": "#aaaaaa",
+        "foreColor": "#111111",
+        "text": "Write here!",
+        "sound": 1
+      },
+      "notes": {
+        "0": {
+          "title": "Note title",
+          "backColor": "#aaaaaa",
+          "foreColor": "#111111",
+          "date": "2022-01-28",
+          "time": "00:00",
+          "willRemind": false,
+          "text": "Write here!",
+          "id": 0
+        },
+        "1": {
+          "title": "Zhopa",
+          "backColor": "#aabbbb",
+          "foreColor": "#000000",
+          "date": "2022-01-28",
+          "time": "01:02",
+          "willRemind": false,
+          "text": "Ochko",
+          "id": 1
+        },
+        "2": {
+          "title": "Hoba",
+          "backColor": "#000000",
+          "foreColor": "#ffffff",
+          "date": "2022-01-28",
+          "time": "00:00",
+          "willRemind": true,
+          "text": "popochka :3",
+          "id": 2
+        }
+      }
+    } 
   }
 }
