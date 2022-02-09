@@ -26,7 +26,6 @@ export const Content = styled.div.attrs<PreferenceColorProps>(
   })
 )<PreferenceColorProps>`
   box-shadow: 10px 10px #111;
-  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,6 +44,7 @@ export const PreferenceSection = styled.div.attrs(({ color }) => ({
   },
 }))`
   width: 300px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;

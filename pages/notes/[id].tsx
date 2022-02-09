@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Redirector from "../../components/functional/redirector";
 import {
   Container,
   TitleText,
@@ -41,6 +42,7 @@ const Note = ({ note }) => {
   }, []);
   return (
     <Container backColor={backColor} foreColor={foreColor}>
+      <Redirector />
       <BackButton color={foreColor} onClick={() => {
         router.back()
       }} />
@@ -67,7 +69,7 @@ const Note = ({ note }) => {
 export const getServerSideProps = async ({ params }) => {
   const { id } = params;
   const response = await fetch(
-    `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/notes/${id}.json`
+    `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}.json`
   );
   const result = await response.json();
   

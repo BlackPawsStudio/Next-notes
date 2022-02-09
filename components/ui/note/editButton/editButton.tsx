@@ -28,10 +28,11 @@ const EditButton = ({id}) => {
 
   const saveSettings = async () => {
     const response = await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/notes/${id}.json`, {
-        method: 'PUT',
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}.json`,
+      {
+        method: "PUT",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title: title,
@@ -41,8 +42,8 @@ const EditButton = ({id}) => {
           time: time,
           text: text,
           id: id,
-          willRemind: willRemind
-        })
+          willRemind: willRemind,
+        }),
       }
     );
     return await response.json()

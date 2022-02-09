@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const prefSlice = createSlice({
-  name: "notes amount",
+  name: "preferences",
   initialState: {
     backColor: "#aaaaaa",
     foreColor: "#111111",

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { updateLogin } from "../../../redux/slices/userSlice";
 import {
   AccountButtons,
   Button,
@@ -9,10 +11,18 @@ import {
   NavLink,
   Content,
   Logo,
+  AccountLabel,
 } from "./header.styles";
 
 const Header = () => {
   const [focus, setFocus] = useState(false);
+  const { login } = useAppSelector(({ userSlice: toolkit }) => {
+    return {
+      login: toolkit.login
+    }
+  })
+  const dispatch = useAppDispatch()
+
   return (
     <Container>
       <Link href="/">
@@ -37,12 +47,23 @@ const Header = () => {
             </Nav>
           </nav>
           <AccountButtons>
-            <Link href="/initialization">
-              <Button>Log In</Button>
-            </Link>
-            <Link href="/initialization">
-              <Button>Sign In</Button>
-            </Link>
+            {login ? (
+              <>
+                <AccountLabel>{login}</AccountLabel>
+                <Link href="/">
+                  <Button onClick={() => dispatch(updateLogin({id: 0, login: ''}))}>Log Out</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/logIn">
+                  <Button>Log In</Button>
+                </Link>
+                <Link href="/signIn">
+                  <Button>Sign In</Button>
+                </Link>
+              </>
+            )}
           </AccountButtons>
         </Content>
       </div>

@@ -7,7 +7,7 @@ const TextField = ({ id, color, prevText }) => {
 
   const saveText = async (text) => {
     const response = await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/notes/${id}/text.json`,
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}/text.json`,
       {
         method: "PUT",
         headers: {

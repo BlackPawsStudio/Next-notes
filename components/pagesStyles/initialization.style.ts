@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
@@ -21,18 +21,18 @@ export const Modal = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 0 60px;
+  padding: 30px 0;
 `;
 
 export const Title = styled.h3`
   font-size: 24px;
-`
+`;
 
 export const Inputs = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 30px;
-`
+`;
 
 export const Input = styled.input`
   width: 170px;
@@ -47,11 +47,19 @@ export const Input = styled.input`
   &:active {
     box-shadow: 1px 1px #111;
   }
-`; 
+`;
 
 export const Buttons = styled.div`
   display: flex;
-  column-gap: 30px;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Additional = styled.div`
+  display: flex;
+  width: 80%;
+  margin-top: 20px;
+  font-size: 12px;
 `;
 
 export const Button = styled.button`

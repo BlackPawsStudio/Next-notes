@@ -20,7 +20,7 @@ const NewNote = ({ oldData }) => {
           id: oldData.length,
         });
         await fetch(
-          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/notes.json`,
+          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes.json`,
           {
             method: "PUT",
             headers: {

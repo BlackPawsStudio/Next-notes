@@ -1,3 +1,4 @@
+import Redirector from "../components/functional/redirector";
 import {
   Container,
   Content,
@@ -22,6 +23,7 @@ const PreferencesPage = () => {
 
   return (
     <Container>
+      <Redirector />
       <Title>Set up your default note</Title>
       <Content onMouseLeave={() => {}} backColor={backColor}>
         <MediaSetup foreColor={foreColor} />

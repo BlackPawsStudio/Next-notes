@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Note from "../../components/ui/note/notes/note";
+import Note from "../../components/ui/note/note/note";
 import NewNote from "../../components/ui/newNote/newNote";
 import {
   Container,
@@ -8,6 +8,7 @@ import {
 } from "../../components/pagesStyles/allNotes.style";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentDate, getCurrentTime, isTimeAhead } from "../../functions/timeFunctions";
+import Redirector from "../../components/functional/redirector";
 
 const AllNotesPage = () => {
   const [allNotes, setAllNotes] = useState([]);
@@ -21,7 +22,7 @@ const AllNotesPage = () => {
   useEffect(() => {
     const getAllNotes = async () => {
       const response = await fetch(
-        "https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/notes.json"
+        "https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes.json"
       );
       const result = await response.json();
       setAllNotes(result ? Object.values(result) : []);
@@ -53,6 +54,7 @@ const AllNotesPage = () => {
 
   return (
     <Container>
+      <Redirector />
       <Title>Your all notes</Title>
       <NoteContainer>
         {typeof allNotes === "string"

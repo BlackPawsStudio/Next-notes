@@ -52,6 +52,7 @@ transition: all .3s;
 export const AccountButtons = styled.div`
   height: 6vh;
   display: flex;
+  align-items: center;
   column-gap: 5vw;
   @media (max-width: 850px) {
     flex-direction: column;
@@ -68,6 +69,11 @@ export const Button = styled.button`
   font-size: 3vh;
   cursor: pointer;
   transition: all 0.3s;
+  &:focus {
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #111;
+  }
   &:hover {
     color: #111;
     background-color: #fff;
@@ -111,3 +117,7 @@ export const Content = styled.div<{ focus }>`
     padding-bottom: 10px;
   }
 `;
+
+export const AccountLabel = styled.p`
+  font-size: 4vh;
+`

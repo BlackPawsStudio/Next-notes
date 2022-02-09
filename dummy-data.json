@@ -11,7 +11,7 @@
         "text": "Write here!",
         "sound": 1
       },
-      "notes": {
+      "notes": {  
         "0": {
           "title": "Note title",
           "backColor": "#aaaaaa",
