@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Redirector from "../../components/functional/redirector";
 import {
   Container,
@@ -13,24 +13,27 @@ import TextField from "../../components/ui/note/textField/textField";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setTitle, updateData } from "../../redux/slices/noteSlice";
 
-const Note = ({ note }) => {
-  const {
-    title,
-    backColor,
-    foreColor,
-    date,
-    time,
-    willRemind,
-    isEditting,
-  } = useAppSelector(({ noteSlice: toolkit }) => {
+interface Note {
+
+}
+
+const Note = () => {
+  const { title, backColor, foreColor, text, date, time, willRemind, isEditting } =
+    useAppSelector(({ noteSlice: toolkit }) => {
+      return {
+        title: toolkit.title,
+        backColor: toolkit.backColor,
+        foreColor: toolkit.foreColor,
+        text: toolkit.text,
+        date: toolkit.date,
+        time: toolkit.time,
+        willRemind: toolkit.willRemind,
+        isEditting: toolkit.isEditting,
+      };
+    });
+  const { id } = useAppSelector(({ userSlice: toolkit }) => {
     return {
-      title: toolkit.title,
-      backColor: toolkit.backColor,
-      foreColor: toolkit.foreColor,
-      date: toolkit.date,
-      time: toolkit.time,
-      willRemind: toolkit.willRemind,
-      isEditting: toolkit.isEditting,
+      id: toolkit.id,
     };
   });
   const dispatch = useAppDispatch();
@@ -38,14 +41,23 @@ const Note = ({ note }) => {
   const router = useRouter();
 
   useEffect(() => {
-    dispatch(updateData(note));
+    async () => {
+      const response = await fetch(
+        `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/notes/${router.query.id}.json`
+      );
+      const note = await response.json()
+      dispatch(updateData(note));
+    };
   }, []);
   return (
     <Container backColor={backColor} foreColor={foreColor}>
       <Redirector />
-      <BackButton color={foreColor} onClick={() => {
-        router.back()
-      }} />
+      <BackButton
+        color={foreColor}
+        onClick={() => {
+          router.back();
+        }}
+      />
       <EditButton id={router.query.id} />
       <TitleText
         editting={isEditting}
@@ -61,23 +73,9 @@ const Note = ({ note }) => {
           ? `You will be reminded at ${time} ${date}`
           : "Reminder disabled"}
       </TimeAlert>
-      <TextField id={router.query.id} color={foreColor} prevText={note.text} />
+      <TextField id={router.query.id} color={foreColor} prevText={text} />
     </Container>
   );
-};
-
-export const getServerSideProps = async ({ params }) => {
-  const { id } = params;
-  const response = await fetch(
-    `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}.json`
-  );
-  const result = await response.json();
-  
-  return {
-    props: {
-      note: result,
-    },
-  };
 };
 
 export default Note;

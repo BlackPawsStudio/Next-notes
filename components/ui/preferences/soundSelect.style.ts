@@ -13,20 +13,17 @@ export const Container = styled.div.attrs(({ color }) => ({
   flex-direction: column;
   row-gap: 1vh;
 `;
-  
-export const Select = styled.select.attrs(({ color }) => ({
-  style: {
-    color: color,
-  },
-}))`
+
+export const Select = styled.select`
+  color: #111;
   width: 150px;
   height: 30px;
   border: 1px solid #111;
-  box-shadow: 4px 4px 0 0 #111111; 
-  transition: all .3s;
+  box-shadow: 4px 4px 0 0 #111111;
+  transition: all 0.3s;
   padding: 5px;
   background: #ffffff77;
-  &:hover{
+  &:hover {
     transform: scale(105%);
   }
-`
+`;

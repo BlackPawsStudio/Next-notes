@@ -19,10 +19,16 @@ const AllNotesPage = () => {
     };
   });
 
+  const { id } = useAppSelector(({ userSlice: toolkit }) => {
+    return {
+      id: toolkit.id
+    }
+  })
+
   useEffect(() => {
     const getAllNotes = async () => {
       const response = await fetch(
-        "https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes.json"
+        `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/notes.json`
       );
       const result = await response.json();
       setAllNotes(result ? Object.values(result) : []);

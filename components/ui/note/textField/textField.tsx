@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setText } from "../../../../redux/slices/noteSlice";
 import { TextContainer } from "./textField.style";
@@ -5,9 +6,21 @@ import { TextContainer } from "./textField.style";
 const TextField = ({ id, color, prevText }) => {
   const dispatch = useAppDispatch();
 
+  const { userId } = useAppSelector(({ userSlice: toolkit }) => {
+    return {
+      userId: toolkit.id,
+    };
+  });
+
+  const { text } = useAppSelector(({ noteSlice: toolkit }) => {
+    return {
+      text: toolkit.text,
+    };
+  });
+
   const saveText = async (text) => {
     const response = await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}/text.json`,
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/notes/${id}/text.json`,
       {
         method: "PUT",
         headers: {
@@ -18,7 +31,13 @@ const TextField = ({ id, color, prevText }) => {
     );
     return await response.json();
   };
-  
+
+  useEffect(() => {
+    return () => {
+      saveText(text);
+    };
+  });
+
   return (
     <TextContainer
       color={color}
@@ -26,7 +45,6 @@ const TextField = ({ id, color, prevText }) => {
       defaultValue={prevText}
       onChange={async ({ target }) => {
         dispatch(setText(target.value));
-        await saveText(target.value);
       }}
     ></TextContainer>
   );

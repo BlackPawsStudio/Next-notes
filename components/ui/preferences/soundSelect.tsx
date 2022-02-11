@@ -2,13 +2,14 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { updateSound } from "../../../redux/slices/prefsSlice";
 import { Container, Select } from "./soundSelect.style";
 
-const SoundSelect = ({ color }) => {
+const SoundSelect = ({ color, sound }) => {
   const dispatch = useAppDispatch();
 
   return (
     <Container color={color}>
       Select notification sound
       <Select
+        defaultValue={sound}
         onChange={(e) => {
           const audio = new Audio(`/sounds/${e.target.value}.mp3`);
           audio.play();
@@ -17,7 +18,6 @@ const SoundSelect = ({ color }) => {
             audio.pause();
           }, 3000);
         }}
-        color={color}
       >
         <option value={1}>Ding-dong</option>
         <option value={2}>Xilophone</option>

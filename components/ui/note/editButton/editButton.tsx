@@ -26,9 +26,15 @@ const EditButton = ({id}) => {
   });
   const dispatch = useAppDispatch();
 
+  const { userId } = useAppSelector(({ userSlice: toolkit }) => {
+    return {
+      userId: toolkit.id,
+    };
+  })
+
   const saveSettings = async () => {
     const response = await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}.json`,
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/notes/${id}.json`,
       {
         method: "PUT",
         headers: {

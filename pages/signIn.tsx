@@ -12,7 +12,6 @@ import {
   Title,
 } from "../components/pagesStyles/initialization.style";
 import { useAppDispatch } from "../redux/hooks";
-import { updateLogin } from "../redux/slices/userSlice";
 
 const Initialization = () => {
   const [login, setLogin] = useState("");
@@ -22,24 +21,15 @@ const Initialization = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await fetch("/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        login: login,
-        password: password,
-      }),
-    });
+    const response = await fetch(
+      `/api/users?login=${login}&password=${password}`,
+      {
+        method: "POST",
+      }
+    );
     const result = await response.json();
-    if (result.message) {
-      alert("Incorrect!");
-    } else {
-      dispatch(updateLogin({ id: result.id, login: result.login }));
-      router.push("/notes");
-    }
+
+    console.log(result);
   };
   return (
     <Container>

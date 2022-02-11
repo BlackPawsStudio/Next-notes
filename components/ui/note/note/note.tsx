@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useAppDispatch } from "../../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { decreaseAmount } from "../../../../redux/slices/allNotesSlice";
 import { updateData } from "../../../../redux/slices/noteSlice";
 import {
@@ -16,11 +16,17 @@ import {
 const Note = ({ note, id }) => {
   const dispatch = useAppDispatch();
 
+  const { userId } = useAppSelector(({ userSlice: toolkit }) => {
+    return {
+      userId: toolkit.id
+    }
+  })
+
   const { title, backColor, foreColor, date, time, willRemind, text } = note;
 
   const deleteNote = async (id) => {
     await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes/${id}.json`,
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/notes/${id}.json`,
       {
         method: "DELETE",
       }

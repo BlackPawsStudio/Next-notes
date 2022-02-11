@@ -1,26 +1,43 @@
-import { getCurrentDate, getCurrentTime } from "../../../functions/timeFunctions";
-import { useAppDispatch } from "../../../redux/hooks";
+import {
+  getCurrentDate,
+  getCurrentTime,
+} from "../../../functions/timeFunctions";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { increaseAmount } from "../../../redux/slices/allNotesSlice";
 import { Container, PlusLine } from "./newNote.style";
 
 const NewNote = ({ oldData }) => {
   const dispatch = useAppDispatch();
+  const { id } = useAppSelector(({ userSlice: toolkit }) => {
+    return {
+      id: toolkit.id,
+    };
+  });
+
+  const { title, backColor, foreColor, text } = useAppSelector(({ prefsSlice: toolkit }) => {
+    return {
+      title: toolkit.title,
+      backColor: toolkit.backColor,
+      foreColor: toolkit.foreColor,
+      text: toolkit.text
+    }
+  }) 
 
   return (
     <Container
       onClick={async () => {
         oldData.push({
-          title: "Note title",
-          backColor: "#aaaaaa",
-          foreColor: "#111111",
+          title: title,
+          backColor: backColor,
+          foreColor: foreColor,
           date: getCurrentDate(),
           time: getCurrentTime(),
           willRemind: false,
-          text: "Write here!",
+          text: text,
           id: oldData.length,
         });
         await fetch(
-          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/0/notes.json`,
+          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/notes.json`,
           {
             method: "PUT",
             headers: {
@@ -29,7 +46,7 @@ const NewNote = ({ oldData }) => {
             body: JSON.stringify(
               oldData.map((el, id) => {
                 if (el) el.id = id;
-                return el
+                return el;
               })
             ),
           }

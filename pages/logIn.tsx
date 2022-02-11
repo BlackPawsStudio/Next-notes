@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   Additional,
@@ -10,24 +11,27 @@ import {
   Modal,
   Title,
 } from "../components/pagesStyles/initialization.style";
+import { useAppDispatch } from "../redux/hooks";
+import { updateLogin } from "../redux/slices/userSlice";
 
 const Initialization = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    const a = await fetch("/api/users", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        login: login,
-        password: password,
-      }),
-    });
-    console.log(await a.json());
+
+    const response = await fetch(`/api/users?login=${login}&password=${password}`);
+    const result = await response.json();
+    if (result.message) {      
+      alert(result.message);
+    } else {
+      dispatch(updateLogin({ id: result.id, login: result.login }));
+      router.push("/notes");
+    }
   };
   return (
     <Container>

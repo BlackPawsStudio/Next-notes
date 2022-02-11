@@ -9,7 +9,7 @@ import { PreferenceSection } from "../pagesStyles/preferences.style";
 import SoundSelect from "../ui/preferences/soundSelect";
 
 
-const MediaSetup = ({ foreColor }) => {
+const MediaSetup = ({ foreColor, sound }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -40,7 +40,7 @@ const MediaSetup = ({ foreColor }) => {
         />
       </InputLabel>
 
-      <SoundSelect color={foreColor} />
+      <SoundSelect color={foreColor} sound={sound} />
     </PreferenceSection>
   );
 };
