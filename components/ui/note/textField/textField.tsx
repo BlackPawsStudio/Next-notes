@@ -43,8 +43,10 @@ const TextField = ({ id, color, prevText }) => {
       color={color}
       spellCheck={false}
       defaultValue={prevText}
-      onChange={async ({ target }) => {
-        dispatch(setText(target.value));
+      onChange={({ target }) => {
+        setTimeout(() => {
+          dispatch(setText(target.value));
+        }, 0);
       }}
     ></TextContainer>
   );

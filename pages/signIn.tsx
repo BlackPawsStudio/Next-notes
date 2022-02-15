@@ -12,6 +12,8 @@ import {
   Title,
 } from "../components/pagesStyles/initialization.style";
 import { useAppDispatch } from "../redux/hooks";
+import { updateAll } from "../redux/slices/prefsSlice";
+import { updateLogin } from "../redux/slices/userSlice";
 
 const Initialization = () => {
   const [login, setLogin] = useState("");
@@ -28,8 +30,15 @@ const Initialization = () => {
       }
     );
     const result = await response.json();
-
     console.log(result);
+    
+    if (result.message) {
+      alert(result.message);
+    } else {
+      dispatch(updateLogin({ id: result.id, login: result.login }));
+      dispatch(updateAll(result.prefs));
+      router.push("/notes");
+    }
   };
   return (
     <Container>

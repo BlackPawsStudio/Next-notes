@@ -39,7 +39,7 @@ export const Nav = styled.ul`
 
 export const NavLink = styled.li`
 transition: all .3s;
-  font-size: 5vh;
+  font-size: calc(2vh + 1vw);
   cursor: pointer;
   &:hover{
     text-shadow: 0 0 5px #fff;

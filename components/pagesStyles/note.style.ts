@@ -13,12 +13,15 @@ export const Container = styled.div.attrs<ContainerProps>(
     },
   })
 )<ContainerProps>`
-  width: 70%;
-  margin: 7% 0;
+  width: 100%;
+  margin: 7vh 15vw;
   position: relative;
   display: grid;
   grid-template-rows: 11vh 0vh 6vh auto;
   overflow: hidden;
+  @media (max-width: 850px) {
+    margin: 7vh 0;
+  }
 `;
 
 type TitleTextProps = {

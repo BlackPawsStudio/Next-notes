@@ -9,7 +9,7 @@ import { PreferenceSection } from "../pagesStyles/preferences.style";
 import SoundSelect from "../ui/preferences/soundSelect";
 
 
-const MediaSetup = ({ foreColor, sound }) => {
+const MediaSetup = ({ foreColor, backColor, sound }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -22,7 +22,7 @@ const MediaSetup = ({ foreColor, sound }) => {
           editting={true}
           disabled={false}
           type="color"
-          defaultValue={"#aaaaaa"}
+          defaultValue={backColor}
           onChange={(e) => dispatch(updateBackColor(e.target.value))}
         />
       </InputLabel>
@@ -35,7 +35,7 @@ const MediaSetup = ({ foreColor, sound }) => {
           editting={true}
           disabled={false}
           type="color"
-          defaultValue={"#111111"}
+          defaultValue={foreColor}
           onChange={(e) => dispatch(updateForeColor(e.target.value))}
         />
       </InputLabel>

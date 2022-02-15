@@ -9,13 +9,14 @@ const handler = async (req, res) => {
       id: el.id,
       login: el.login,
       password: el.password,
+      prefs: el.prefs,
     };
   });
 
   if (req.method === "GET") {
     const foundUser = allUsers.find((el) => {
       if (el.login === data.login) {
-        return el
+        return el;
       }
     });
     if (foundUser) {
@@ -27,7 +28,8 @@ const handler = async (req, res) => {
     } else {
       res.status(500).json({ message: "Account not found" });
     }
-  } else if (req.method === "POST") {
+  }
+  if (req.method === "POST") {
     const isTaken = allUsers.find((el) => {
       if (el.login === data.login) {
         return el;
@@ -53,7 +55,7 @@ const handler = async (req, res) => {
 
       console.log(result);
 
-      const a = await fetch(
+      await fetch(
         `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
         {
           method: "PUT",
@@ -68,8 +70,7 @@ const handler = async (req, res) => {
           ),
         }
       );
-      const re = await a;
-      await res.status(201).json(re);
+      await res.status(201).json(result[result.length - 1]);
     } else {
       res.status(500).json({ message: "This login is already taken" });
     }

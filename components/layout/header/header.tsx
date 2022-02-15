@@ -16,13 +16,23 @@ import {
 
 const Header = () => {
   const [focus, setFocus] = useState(false);
-  const { login } = useAppSelector(({ userSlice: toolkit }) => {
+  const { id, login } = useAppSelector(({ userSlice: toolkit }) => {
     return {
+      id: toolkit.id,
       login: toolkit.login
     }
   })
   const dispatch = useAppDispatch()
 
+  const deleteUser = async () => {
+    await fetch(
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+    dispatch(updateLogin({ id: 0, login: "" }));
+  };
   return (
     <Container>
       <Link href="/">
@@ -49,9 +59,22 @@ const Header = () => {
           <AccountButtons>
             {login ? (
               <>
-                <AccountLabel>{login}</AccountLabel>
+                {/* <AccountLabel>{login}</AccountLabel> */}
                 <Link href="/">
-                  <Button onClick={() => dispatch(updateLogin({id: 0, login: ''}))}>Log Out</Button>
+                  <Button
+                    onClick={() => dispatch(updateLogin({ id: 0, login: "" }))}
+                  >
+                    Log Out
+                  </Button>
+                </Link>
+                <Link href="/">
+                  <Button
+                    onClick={async () => {
+                      await deleteUser();
+                    }}
+                  >
+                    Delete User
+                  </Button>
                 </Link>
               </>
             ) : (

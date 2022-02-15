@@ -3,18 +3,19 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  row-gap: 7%;
+  row-gap: 3vh;
   flex-direction: column;
-  margin-top: 3%;
+  padding-top: 3%;
 `;
 
 export const Title = styled.p`
-  font-size: calc(5vh + 2vw);
+  font-size: calc(4vh + 2vw);
   font-weight: bold;
   text-align: center;
   user-select: none;
   color: #111;
   padding: 0 10%;
+  margin-bottom: 3%;
 `;
 
 export const Content = styled.div.attrs<PreferenceColorProps>(
@@ -30,7 +31,6 @@ export const Content = styled.div.attrs<PreferenceColorProps>(
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  padding-bottom: 3%;
 `;
 
 type PreferenceColorProps = {
@@ -44,7 +44,7 @@ export const PreferenceSection = styled.div.attrs(({ color }) => ({
   },
 }))`
   width: 300px;
-  height: 400px;
+  height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;

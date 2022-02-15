@@ -53,7 +53,7 @@ const PreferencesPage = () => {
       <Redirector />
       <Title>Set up your default note</Title>
       <Content onMouseLeave={() => {}} backColor={backColor}>
-        <MediaSetup foreColor={foreColor} sound={sound} />
+        <MediaSetup foreColor={foreColor} backColor={backColor} sound={sound} />
         <TextSetup
           foreColor={foreColor}
           title={title}

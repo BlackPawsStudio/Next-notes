@@ -6,8 +6,7 @@ export const Container = styled.div`
   align-items: center;
   row-gap: 10vh;
   margin: 0 10%;
-  /* height: 100%; */
-  padding-top: 7%;
+  padding-top: 7vh;
   `;
 
 export const NoteContainer = styled.div`
@@ -22,7 +21,7 @@ export const NoteContainer = styled.div`
 `;
 
 export const Title = styled.p`
-  font-size: calc(5vh + 2vw);
+  font-size: calc(4vh + 2vw);
   font-weight: bold;
   text-align: center;
   user-select: none;
