@@ -13,11 +13,11 @@ const Redirector = () => {
 
   useEffect(() => {
     if (login === "") {
-      alert('Log in first!')
+      alert("Log in first!");
       router.push("/logIn");
     }
-  }, [])
-  
+  }, []);
+
   return <></>;
 };
 

@@ -2,11 +2,13 @@ import { Main } from "./main.style";
 import Background from "./background/background";
 import Header from "./header/header";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }) => {  
   return (
     <>
       <Header />
-      <Main>{children}</Main>
+      <Main>
+        {children}
+      </Main>
       <Background></Background>
     </>
   );

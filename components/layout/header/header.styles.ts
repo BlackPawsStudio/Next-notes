@@ -117,7 +117,3 @@ export const Content = styled.div<{ focus }>`
     padding-bottom: 10px;
   }
 `;
-
-export const AccountLabel = styled.p`
-  font-size: 4vh;
-`

@@ -6,12 +6,19 @@ import {
   NoteContainer,
   Title,
 } from "../../components/pagesStyles/allNotes.style";
-import { useAppSelector } from "../../redux/hooks";
-import { getCurrentDate, getCurrentTime, isTimeAhead } from "../../functions/timeFunctions";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Redirector from "../../components/functional/redirector";
+import { setNotifications } from "../../redux/slices/notificationSlice";
+import { checkNotifications } from "../../functions/notificationFunctions";
 
 const AllNotesPage = () => {
   const [allNotes, setAllNotes] = useState([]);
+
+  const { notifications } = useAppSelector(({ notificationSlice: toolkit }) => {
+    return {
+      notifications: toolkit.notifications,
+    };
+  });
 
   const { amount } = useAppSelector(({ amountSlice: toolkit }) => {
     return {
@@ -21,9 +28,11 @@ const AllNotesPage = () => {
 
   const { id } = useAppSelector(({ userSlice: toolkit }) => {
     return {
-      id: toolkit.id
-    }
-  })
+      id: toolkit.id,
+    };
+  });
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getAllNotes = async () => {
@@ -32,31 +41,25 @@ const AllNotesPage = () => {
       );
       const result = await response.json();
       setAllNotes(result ? Object.values(result) : []);
+      if (result) {
+        const newNotifications = result
+          .map((el) => {
+            if (el.willRemind) {
+              return { time: el.time, date: el.date };
+            }
+          })
+          .filter((el) => {
+            if (el) {
+              return el;
+            }
+          });
+          if (!checkNotifications({ new: newNotifications, old: notifications })) {
+            dispatch(setNotifications(newNotifications));
+        }
+      }
     };
-
     getAllNotes();
   }, [amount]);
-
-  useEffect(() => {
-    if (allNotes) {
-      allNotes.forEach((note) => {
-        if (note)
-          if (
-            note.willRemind &&
-            getCurrentDate() === note.date &&
-            isTimeAhead(note.time)
-          ) {
-            const interval = setInterval(() => {
-              if (getCurrentTime() === note.time) {
-                alert(`Notification!!!!`);
-                clearInterval(interval);
-              }
-            }, 10000);
-            console.log(`${note.id} will remind`);
-          }
-      });
-    }
-  }, [allNotes]);
 
   return (
     <Container>

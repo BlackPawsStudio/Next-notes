@@ -11,7 +11,6 @@ import {
   NavLink,
   Content,
   Logo,
-  AccountLabel,
 } from "./header.styles";
 
 const Header = () => {
@@ -19,10 +18,10 @@ const Header = () => {
   const { id, login } = useAppSelector(({ userSlice: toolkit }) => {
     return {
       id: toolkit.id,
-      login: toolkit.login
-    }
-  })
-  const dispatch = useAppDispatch()
+      login: toolkit.login,
+    };
+  });
+  const dispatch = useAppDispatch();
 
   const deleteUser = async () => {
     await fetch(
@@ -59,10 +58,11 @@ const Header = () => {
           <AccountButtons>
             {login ? (
               <>
-                {/* <AccountLabel>{login}</AccountLabel> */}
                 <Link href="/">
                   <Button
-                    onClick={() => dispatch(updateLogin({ id: 0, login: "" }))}
+                    onClick={() => {
+                      dispatch(updateLogin({ id: NaN, login: "" }));
+                    }}
                   >
                     Log Out
                   </Button>

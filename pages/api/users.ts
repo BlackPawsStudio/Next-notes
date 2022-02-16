@@ -40,7 +40,7 @@ const handler = async (req, res) => {
 
     if (!isTaken) {
       result.push({
-        id: 0,
+        id: NaN,
         login: data.login,
         password: data.password,
         prefs: {
