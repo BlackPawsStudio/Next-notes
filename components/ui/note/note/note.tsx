@@ -52,7 +52,7 @@ const Note = ({ note, id }) => {
         disabled
         defaultValue={text}
       ></TextContainer>
-      <Link href={`notes/${id}`}>
+      <Link href={`notes/${id}`} passHref>
         <Btn
           color={foreColor}
           onClick={() => {
@@ -68,7 +68,7 @@ const Note = ({ note, id }) => {
         delete
         onClick={async () => {
           await deleteNote(id);
-          dispatch(decreaseAmount())
+          dispatch(decreaseAmount());
         }}
       >
         Delete note

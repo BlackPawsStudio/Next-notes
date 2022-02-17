@@ -34,7 +34,7 @@ const Header = () => {
   };
   return (
     <Container>
-      <Link href="/">
+      <Link href="/notes" passHref>
         <Logo>Next notes</Logo>
       </Link>
       <div
@@ -47,10 +47,10 @@ const Header = () => {
 
           <nav>
             <Nav>
-              <Link href="/notes">
+              <Link href="/notes" passHref>
                 <NavLink>All</NavLink>
               </Link>
-              <Link href="/preferences">
+              <Link href="/preferences" passHref>
                 <NavLink>Prefs</NavLink>
               </Link>
             </Nav>
@@ -58,7 +58,7 @@ const Header = () => {
           <AccountButtons>
             {login ? (
               <>
-                <Link href="/">
+                <Link href="/" passHref>
                   <Button
                     onClick={() => {
                       dispatch(updateLogin({ id: NaN, login: "" }));
@@ -67,7 +67,7 @@ const Header = () => {
                     Log Out
                   </Button>
                 </Link>
-                <Link href="/">
+                <Link href="/" passHref>
                   <Button
                     onClick={async () => {
                       await deleteUser();
@@ -79,10 +79,10 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link href="/logIn">
+                <Link href="/logIn" passHref>
                   <Button>Log In</Button>
                 </Link>
-                <Link href="/signIn">
+                <Link href="/signIn" passHref>
                   <Button>Sign Up</Button>
                 </Link>
               </>

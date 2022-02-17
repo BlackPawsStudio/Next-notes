@@ -13,12 +13,6 @@ import { setNotifications } from "../../redux/slices/notificationSlice";
 const AllNotesPage = () => {
   const [allNotes, setAllNotes] = useState([]);
 
-  const { notifications } = useAppSelector(({ notificationSlice: toolkit }) => {
-    return {
-      notifications: toolkit.notifications,
-    };
-  });
-
   const { amount } = useAppSelector(({ amountSlice: toolkit }) => {
     return {
       amount: toolkit.amount,
@@ -61,7 +55,7 @@ const AllNotesPage = () => {
       }
     };
     getAllNotes();
-  }, [amount]);
+  }, [amount, dispatch, id]);
 
   return (
     <Container>
