@@ -1,18 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getCurrentDate,
-  getCurrentTime,
-  isTimeAhead,
+  getTimeAhead,
 } from "../../functions/timeFunctions";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { removeNotification } from "../../redux/slices/notificationSlice";
+import { useAppSelector } from "../../redux/hooks";
 
 const Notifications = () => {
+  const [alerts, setAlerts] = useState([]);
+
   const { notifications } = useAppSelector(({ notificationSlice: toolkit }) => {
     return {
-      notifications: toolkit.notifications
-    }
-  })
+      notifications: toolkit.notifications,
+    };
+  });
 
   const { sound } = useAppSelector(({ prefsSlice: toolkit }) => {
     return {
@@ -20,26 +20,28 @@ const Notifications = () => {
     };
   });
 
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
-    const alarm = new Audio(`../sounds/${sound}.mp3`);
-    notifications.forEach((note) => {
-      if (note)
-        if (
-          getCurrentDate() === note.date &&
-          isTimeAhead(note.time)
-        ) {
-          // dispatch(removeNotification(note))
-          const interval = setInterval(() => {
-            if (getCurrentTime() === note.time) {
-              alarm.play();
-              alert(`Notification!!!!`);
-              clearInterval(interval);
-            }
-          }, 10000);
-          console.log(`${note.time} will remind`);
-        }
+    Object.values(alerts).forEach((el) => {
+      clearTimeout(el);
+    });
+
+    notifications.forEach((notification) => {
+      const timeAhead = getTimeAhead(notification.time);
+      if (
+        getCurrentDate() === notification.date &&
+        timeAhead > -60000 
+      ) {
+        setAlerts((prev) => {
+          const alarm = new Audio(`../sounds/${sound}.mp3`);
+          prev[notification.id] = setTimeout(() => {
+            alarm.play()
+            alert('notification')
+            notification.time;
+          }, timeAhead);
+          console.log('time', timeAhead);          
+          return prev;
+        });
+      }
     });
   }, [notifications]);
 

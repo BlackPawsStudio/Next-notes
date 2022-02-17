@@ -53,8 +53,6 @@ const handler = async (req, res) => {
         notes: [],
       });
 
-      console.log(result);
-
       await fetch(
         `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
         {

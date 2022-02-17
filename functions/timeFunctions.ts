@@ -16,11 +16,12 @@ export const getCurrentTime = () => {
   }`;
 };
 
-export const isTimeAhead = (expectedTime) => {
+export const getTimeAhead = (expectedTime) => {
   const date = new Date();
-  const expectedMilisec =
-    (expectedTime.split(":")[0] * 360 + expectedTime.split(":")[1] * 6) * 10000;
+  const expectedDate = expectedTime.split(":");
 
+  const expectedMilisec = (expectedDate[0] * 360 + expectedDate[1] * 6) * 10000;
   const currentMilisec = (date.getHours() * 360 + date.getMinutes() * 6) * 10000;   
-  return expectedMilisec - currentMilisec > 0;
+  
+  return expectedMilisec - currentMilisec - date.getSeconds() * 1000;
 }

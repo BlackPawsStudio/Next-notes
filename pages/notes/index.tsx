@@ -9,7 +9,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Redirector from "../../components/functional/redirector";
 import { setNotifications } from "../../redux/slices/notificationSlice";
-import { checkNotifications } from "../../functions/notificationFunctions";
 
 const AllNotesPage = () => {
   const [allNotes, setAllNotes] = useState([]);
@@ -41,21 +40,24 @@ const AllNotesPage = () => {
       );
       const result = await response.json();
       setAllNotes(result ? Object.values(result) : []);
+
       if (result) {
-        const newNotifications = result
-          .map((el) => {
+        const noted = result.filter((el) => {
+          if (el)
             if (el.willRemind) {
-              return { time: el.time, date: el.date };
-            }
-          })
-          .filter((el) => {
-            if (el) {
               return el;
             }
-          });
-          if (!checkNotifications({ new: newNotifications, old: notifications })) {
-            dispatch(setNotifications(newNotifications));
-        }
+        });
+        dispatch(
+          setNotifications(
+            noted.map((el) => {
+              return {
+                time: el.time,
+                date: el.date,
+              };
+            })
+          )
+        );
       }
     };
     getAllNotes();
