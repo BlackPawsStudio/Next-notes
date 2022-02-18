@@ -10,6 +10,18 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Redirector from "../../components/functional/redirector";
 import { setNotifications } from "../../redux/slices/notificationSlice";
 
+type NoteType = {
+  title: string;
+  backColor: string;
+  foreColor: string;
+  date: string;
+  time: string;
+  id: number;
+  willRemind: boolean;
+  text: string;
+  isEditting: boolean;
+};
+
 const AllNotesPage = () => {
   const [allNotes, setAllNotes] = useState([]);
 
@@ -30,13 +42,14 @@ const AllNotesPage = () => {
   useEffect(() => {
     const getAllNotes = async () => {
       const response = await fetch(
-        `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/notes.json`
+        `/api/notes/?user=${id}`
       );
       const result = await response.json();
-      setAllNotes(result ? Object.values(result) : []);
+      const notes:Array<NoteType> = Object.values(result)
+      setAllNotes(notes ? notes : []);
 
-      if (result) {
-        const noted = result.filter((el) => {
+      if (notes) {
+        const noted = notes.filter((el) => {
           if (el)
             if (el.willRemind) {
               return el;

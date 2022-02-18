@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { json } from "stream/consumers";
+import { useEffect } from "react";
 import Redirector from "../components/functional/redirector";
 import {
   Container,
@@ -18,35 +17,42 @@ const PreferencesPage = () => {
         foreColor: toolkit.foreColor,
         title: toolkit.title,
         text: toolkit.text,
-        sound: toolkit.sound
+        sound: toolkit.sound,
       };
     }
   );
 
   const { id } = useAppSelector(({ userSlice: toolkit }) => {
     return {
-      id: toolkit.id
-    }
-  })
+      id: toolkit.id,
+    };
+  });
 
   const updatePref = async () => {
-        await fetch(`https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/prefs.json`, {
-          method: "PUT",
-          body: JSON.stringify({
-            backColor: backColor,
-            foreColor: foreColor,
-            title: title,
-            text: text,
-            sound: sound,
-          }),
-        });
-  }
+    const response = await fetch(
+      `/api/pref`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          id: id,
+          backColor: backColor,
+          foreColor: foreColor,
+          title: title,
+          text: text,
+          sound: sound,
+        }),
+      }
+    );
+    const result = await response.json();
+    console.log(result.message);
+    
+  };
 
   useEffect(() => {
     return () => {
-      updatePref()
-    }
-  })
+      updatePref();
+    };
+  }, []);
 
   return (
     <Container>
@@ -54,11 +60,7 @@ const PreferencesPage = () => {
       <Title>Set up your default note</Title>
       <Content onMouseLeave={() => {}} backColor={backColor}>
         <MediaSetup foreColor={foreColor} backColor={backColor} sound={sound} />
-        <TextSetup
-          foreColor={foreColor}
-          title={title}
-          text={text}
-        />
+        <TextSetup foreColor={foreColor} title={title} text={text} />
       </Content>
     </Container>
   );

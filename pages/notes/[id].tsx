@@ -46,15 +46,17 @@ const Note = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
+  
+  const getData = async () => {
+    const response = await fetch(
+      `/api/notes/?user=${id}&note=${router.query.id}`
+    );
+    const note = await response.json();
+    dispatch(updateData(note));
+  };
 
   useEffect(() => {
-    async () => {
-      const response = await fetch(
-        `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/notes/${router.query.id}.json`
-      );
-      const note = await response.json();
-      dispatch(updateData(note));
-    };
+    getData()
   }, []);
   return (
     <Container backColor={backColor} foreColor={foreColor}>

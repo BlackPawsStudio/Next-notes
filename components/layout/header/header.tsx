@@ -24,13 +24,16 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   const deleteUser = async () => {
-    await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`,
+    const result = await fetch(
+      `/api/users/?id=${id}`,
       {
         method: "DELETE",
       }
     );
-    dispatch(updateLogin({ id: 0, login: "" }));
+    const message = await result.json()
+    console.log(message.message);
+    
+    dispatch(updateLogin({ id: NaN, login: "" }));
   };
   return (
     <Container>

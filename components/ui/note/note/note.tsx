@@ -26,7 +26,7 @@ const Note = ({ note, id }) => {
 
   const deleteNote = async (id) => {
     await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/notes/${id}.json`,
+      `/api/notes?user=${userId}&note=${id}`,
       {
         method: "DELETE",
       }

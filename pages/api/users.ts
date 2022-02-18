@@ -4,14 +4,17 @@ const handler = async (req, res) => {
     "https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json"
   );
   const result = await response.json();
-  const allUsers = result.map((el) => {
-    return {
-      id: el.id,
-      login: el.login,
-      password: el.password,
-      prefs: el.prefs,
-    };
-  });
+  
+  const allUsers = result
+    ? result.map((el) => {
+        return {
+          id: el.id,
+          login: el.login,
+          password: el.password,
+          prefs: el.prefs,
+        };
+      })
+    : [];
 
   if (req.method === "GET") {
     const foundUser = allUsers.find((el) => {
@@ -22,13 +25,17 @@ const handler = async (req, res) => {
     if (foundUser) {
       if (foundUser.password === data.password) {
         res.status(200).json(foundUser);
+        console.log(`${foundUser.login} entered account`);
       } else {
         res.status(500).json({ message: "Incorrect password" });
+        console.log(`${foundUser.login} failed password check`);
       }
     } else {
       res.status(500).json({ message: "Account not found" });
+      console.log(`failed login attempt`);
     }
   }
+
   if (req.method === "POST") {
     const isTaken = allUsers.find((el) => {
       if (el.login === data.login) {
@@ -36,42 +43,81 @@ const handler = async (req, res) => {
       }
     });
 
-    console.log("Sign in result", isTaken);
+    console.log("Sign in result", isTaken ? 'account taken' : "Not found");
 
     if (!isTaken) {
-      result.push({
-        id: NaN,
-        login: data.login,
-        password: data.password,
-        prefs: {
-          title: "Note title",
-          backColor: "#aaaaaa",
-          foreColor: "#111111",
-          text: "Write here!",
-          sound: 1,
-        },
-        notes: [],
-      });
-
-      await fetch(
-        `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+      if (result) {
+        result.push({
+          id: 0,
+          login: data.login,
+          password: data.password,
+          prefs: {
+            title: "Note title",
+            backColor: "#aaaaaa",
+            foreColor: "#111111",
+            text: "Write here!",
+            sound: 1,
           },
-          body: JSON.stringify(
-            result.map((el, id) => {
-              if (el) el.id = id;
-              return el;
-            })
-          ),
-        }
-      );
-      await res.status(201).json(result[result.length - 1]);
+        });
+
+        await fetch(
+          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+              result.map((el, id) => {
+                if (el) el.id = id;
+                return el;
+              })
+            ),
+          }
+        );
+        res.status(201).json(result[result.length - 1]);
+        console.log(`${result[result.length - 1].login} created account`);
+      } else {
+        await fetch(
+          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({0: {
+              id: 0,
+              login: data.login,
+              password: data.password,
+              prefs: {
+                title: "Note title",
+                backColor: "#aaaaaa",
+                foreColor: "#111111",
+                text: "Write here!",
+                sound: 1,
+              },
+            }}),
+          }
+        );
+        res.status(201).json();
+      }
     } else {
       res.status(500).json({ message: "This login is already taken" });
+      console.log('Tried to enter taken account');
     }
+  }
+
+  if (req.method === "DELETE") {
+    const userId = data.id;
+    await fetch(
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+    res.status(200).json({ message: "success" });
+    console.log(`${userId} deleted account`);
+    
   }
 };
 

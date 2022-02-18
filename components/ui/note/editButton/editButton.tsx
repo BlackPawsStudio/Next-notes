@@ -33,8 +33,8 @@ const EditButton = ({id}) => {
   })
 
   const saveSettings = async () => {
-    const response = await fetch(
-      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/notes/${id}.json`,
+    await fetch(
+      `/api/notes?user=${userId}&note=${id}`,
       {
         method: "PUT",
         headers: {
@@ -52,7 +52,6 @@ const EditButton = ({id}) => {
         }),
       }
     );
-    return await response.json()
   }
 
   const onClick = async () => {
