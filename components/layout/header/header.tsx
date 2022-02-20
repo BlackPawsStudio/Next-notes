@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { setModal, setObject } from "../../../redux/slices/modalSlice";
 import { updateLogin } from "../../../redux/slices/userSlice";
 import {
   AccountButtons,
@@ -21,20 +23,36 @@ const Header = () => {
       login: toolkit.login,
     };
   });
+
+  const { state, object } = useAppSelector(({ modalSlice: toolkit }) => {
+    return {
+      state: toolkit.state,
+      object: toolkit.object
+    };
+  });
+
+  const router = useRouter();
+
   const dispatch = useAppDispatch();
 
   const deleteUser = async () => {
-    const result = await fetch(
-      `/api/users/?id=${id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    const message = await result.json()
+    const result = await fetch(`/api/users/?id=${id}`, {
+      method: "DELETE",
+    });
+    const message = await result.json();
     console.log(message.message);
-    
+
     dispatch(updateLogin({ id: NaN, login: "" }));
+    router.push('/')
   };
+
+  useEffect(() => {
+    if (state === "yes" && object === "user") {
+      deleteUser();
+      dispatch(setModal("free"));
+      dispatch(setObject({object: "none", id: NaN}));
+    }
+  }, [state]);
   return (
     <Container>
       <Link href="/notes" passHref>
@@ -70,22 +88,21 @@ const Header = () => {
                     Log Out
                   </Button>
                 </Link>
-                <Link href="/" passHref>
-                  <Button
-                    onClick={async () => {
-                      await deleteUser();
-                    }}
-                  >
-                    Delete User
-                  </Button>
-                </Link>
+                <Button
+                  onClick={() => {
+                    dispatch(setObject({object: 'user'}))
+                    dispatch(setModal("show"));
+                  }}
+                >
+                  Delete User
+                </Button>
               </>
             ) : (
               <>
                 <Link href="/logIn" passHref>
                   <Button>Log In</Button>
                 </Link>
-                <Link href="/signIn" passHref>
+                <Link href="/signUp" passHref>
                   <Button>Sign Up</Button>
                 </Link>
               </>

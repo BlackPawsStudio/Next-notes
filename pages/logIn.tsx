@@ -64,7 +64,7 @@ const Initialization = () => {
           <Button>Confirm</Button>
           <Additional>
             {"Don't have an account?"}
-            <Link href="/signIn" passHref>
+            <Link href="/signUp" passHref>
               <Button>Sign up</Button>
             </Link>
           </Additional>

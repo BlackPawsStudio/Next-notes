@@ -1,5 +1,6 @@
 const handler = async (req, res) => {
   const data = req.query;
+
   if (req.method === "GET") {
     if (data.note) {
       const response = await fetch(
@@ -43,6 +44,21 @@ const handler = async (req, res) => {
     res.status(200).json({ message: "done" });
     console.log(`${data.user} updated ${data.note} note`);
     console.log("changed data", JSON.stringify(req.body));
+  }
+
+  if (req.method === "POST") {
+    await fetch(
+      `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${data.user}/notes.json`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(req.body),
+      }
+    );
+    res.status(201).json({ message: "done" });
+    console.log(`${data.user} created new note`);
   }
 };
 

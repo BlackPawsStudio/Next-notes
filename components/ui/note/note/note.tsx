@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { decreaseAmount } from "../../../../redux/slices/allNotesSlice";
+import { setModal, setObject } from "../../../../redux/slices/modalSlice";
 import { updateData } from "../../../../redux/slices/noteSlice";
 import {
   Btn,
@@ -18,23 +20,41 @@ const Note = ({ note, id }) => {
 
   const { userId } = useAppSelector(({ userSlice: toolkit }) => {
     return {
-      userId: toolkit.id
-    }
-  })
-
+      userId: toolkit.id,
+    };
+  });
   const { title, backColor, foreColor, date, time, willRemind, text } = note;
 
+  const { modal, object, noteId } = useAppSelector(
+    ({ modalSlice: toolkit }) => {
+      return {
+        modal: toolkit.state,
+        object: toolkit.object,
+        noteId: toolkit.id,
+      };
+    }
+  );
+
   const deleteNote = async (id) => {
-    await fetch(
-      `/api/notes?user=${userId}&note=${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    await fetch(`/api/notes?user=${userId}&note=${id}`, {
+      method: "DELETE",
+    });
+    dispatch(decreaseAmount());
   };
 
+  useEffect(() => {
+    if (modal === "yes" && object === "note" && id === noteId) {
+      deleteNote(id);
+      dispatch(setModal("free"));
+      dispatch(setObject({ object: "none", id: NaN }));
+    }
+  }, [modal]);
+
   return (
-    <Container backColor={backColor} foreColor={foreColor}>
+    <Container
+      backColor={backColor}
+      foreColor={foreColor}
+    >
       <Title color={foreColor}>{title}</Title>
       <TimeContainer color={foreColor}>
         {willRemind ? (
@@ -66,9 +86,9 @@ const Note = ({ note, id }) => {
       <Btn
         color={foreColor}
         delete
-        onClick={async () => {
-          await deleteNote(id);
-          dispatch(decreaseAmount());
+        onClick={() => {
+          dispatch(setObject({ object: "note", id: id }));
+          dispatch(setModal("show"));
         }}
       >
         Delete note

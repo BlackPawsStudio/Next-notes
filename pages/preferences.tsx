@@ -7,7 +7,8 @@ import {
 } from "../components/pagesStyles/preferences.style";
 import MediaSetup from "../components/preferences/mediaSetup";
 import TextSetup from "../components/preferences/textSetup";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setTarget } from "../redux/slices/saverSlice";
 
 const PreferencesPage = () => {
   const { backColor, foreColor, title, text, sound } = useAppSelector(
@@ -22,37 +23,13 @@ const PreferencesPage = () => {
     }
   );
 
-  const { id } = useAppSelector(({ userSlice: toolkit }) => {
-    return {
-      id: toolkit.id,
-    };
-  });
-
-  const updatePref = async () => {
-    const response = await fetch(
-      `/api/pref`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          id: id,
-          backColor: backColor,
-          foreColor: foreColor,
-          title: title,
-          text: text,
-          sound: sound,
-        }),
-      }
-    );
-    const result = await response.json();
-    console.log(result.message);
-    
-  };
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    return () => {
-      updatePref();
-    };
-  }, []);
+    return (() => {
+      dispatch(setTarget("prefs"))
+    })
+  }, [])
 
   return (
     <Container>

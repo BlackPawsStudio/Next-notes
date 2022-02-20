@@ -37,9 +37,9 @@ const NewNote = ({ oldData }) => {
           id: oldData.length,
         });
         await fetch(
-          `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${id}/notes.json`,
+          `/api/notes?user=${id}&new=true`,
           {
-            method: "PUT",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },

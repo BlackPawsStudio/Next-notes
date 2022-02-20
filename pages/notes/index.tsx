@@ -9,6 +9,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Redirector from "../../components/functional/redirector";
 import { setNotifications } from "../../redux/slices/notificationSlice";
+import { setTarget } from "../../redux/slices/saverSlice";
 
 type NoteType = {
   title: string;
@@ -69,7 +70,7 @@ const AllNotesPage = () => {
     };
     getAllNotes();
   }, [amount, dispatch, id]);
-
+  
   return (
     <Container>
       <Redirector />
