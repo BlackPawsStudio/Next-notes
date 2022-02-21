@@ -94,7 +94,6 @@ export const TextContainer = styled.div<{ color }>`
   resize: none;
   padding: 3%;
   margin-bottom: -2%;
-  font-size: 2vh;
   color: ${(props) => props.color};
   overflow-y: auto;
   overflow-x: hidden;
