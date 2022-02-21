@@ -61,9 +61,17 @@ export const TimeSeparator = styled.div<{ color }>`
   background-color: ${(props) => props.color};
 `;
 
+export const Buttons = styled.div`
+  height: 20%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`
+
 export const Btn = styled.button<{ delete; color }>`
   width: 100%;
-  height: 10%;
+  height: 50%;
   background-color: #ffffff40;
   border: none;
   color: ${(props) => props.color};
@@ -78,7 +86,7 @@ export const Btn = styled.button<{ delete; color }>`
   }
 `;
 
-export const TextContainer = styled.textarea<{ color }>`
+export const TextContainer = styled.div<{ color }>`
   width: 100%;
   height: 50%;
   background: none;
@@ -86,7 +94,55 @@ export const TextContainer = styled.textarea<{ color }>`
   resize: none;
   padding: 3%;
   margin-bottom: -2%;
-  color: #fff;
+  font-size: 2vh;
   color: ${(props) => props.color};
+  overflow-y: auto;
+  overflow-x: hidden;
   cursor: text;
+  & > * {
+    margin-bottom: 10px;
+  }
+  & > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    text-align: center;
+  }
+  & > p {
+    & > img {
+      width: 100%;
+      transition: all 0.3s;
+      &:active {
+        width: 1000%;
+      }
+    }
+  }
+  & > blockquote {
+    border-left: 5px solid #00000066;
+    background-color: #00000022;
+    padding: 5px;
+    border-radius: 0 5px 5px 0;
+  }
+  & > ul,
+  ol {
+    list-style-position: inside;
+  }
+  & > pre {
+    margin: 10px 0;
+    overflow-x: auto;
+    background-color: #00000033;
+    padding: 5px;
+    border-radius: 5px;
+    &::-webkit-scrollbar {
+      cursor: pointer;
+      height: 7px !important;
+    }
+  }
+  & > hr {
+    width: 100%;
+    background-color: ${(props) => props.color};
+    border: 1px solid ${(props) => props.color};
+  }
 `;

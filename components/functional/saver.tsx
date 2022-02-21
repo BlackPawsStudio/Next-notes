@@ -50,7 +50,7 @@ const Saver = () => {
   const dispatch = useAppDispatch()
 
   const updatePref = async () => {
-    const response = await fetch(`/api/pref`, {
+    await fetch(`/api/pref`, {
       method: "PUT",
       body: JSON.stringify({
         id: id,
@@ -61,27 +61,21 @@ const Saver = () => {
         sound: sound,
       }),
     });
-    const result = await response.json();
-    console.log(result.message);
-      dispatch(setTarget("none"));
+    dispatch(setTarget("none"));
   };
 
   const updateNote = async () => {
-    const response = await fetch(`/api/notes?user=${userId}&note=${data.id}`, {
+    await fetch(`/api/notes?user=${userId}&note=${data.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
-    console.log("res", result.message);
-      dispatch(setTarget("none"));
+    dispatch(setTarget("none"));
   };
 
   useEffect(() => {
-    console.log(target);
-
     if (target === "note") {
       updateNote();
     }

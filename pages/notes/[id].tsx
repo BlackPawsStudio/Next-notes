@@ -75,6 +75,7 @@ const Note = () => {
         color={data.foreColor}
         disabled={!data.isEditting}
         type="text"
+        maxLength={15}
         defaultValue={data.title}
         onChange={({ target }) => dispatch(setTitle(target.value))}
       />

@@ -17,6 +17,7 @@
     "next": "12.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-markdown": "^8.0.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-toolkit": "^1.1.2",
@@ -30,5 +31,5 @@
   },
   "engines": {
     "node": "v14.16.x"
-    }
+  }
 }

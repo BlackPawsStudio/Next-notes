@@ -13,7 +13,9 @@ import {
   TimeContainer,
   TimeSeparator,
   Title,
+  Buttons,
 } from "./note.style";
+import ReactMarkdown from "react-markdown";
 
 const Note = ({ note, id }) => {
   const dispatch = useAppDispatch();
@@ -51,10 +53,7 @@ const Note = ({ note, id }) => {
   }, [modal]);
 
   return (
-    <Container
-      backColor={backColor}
-      foreColor={foreColor}
-    >
+    <Container backColor={backColor} foreColor={foreColor}>
       <Title color={foreColor}>{title}</Title>
       <TimeContainer color={foreColor}>
         {willRemind ? (
@@ -67,32 +66,32 @@ const Note = ({ note, id }) => {
           "Reminder disabled"
         )}
       </TimeContainer>
-      <TextContainer
-        color={foreColor}
-        disabled
-        defaultValue={text}
-      ></TextContainer>
-      <Link href={`notes/${id}`} passHref>
+      <TextContainer color={foreColor}>
+        <ReactMarkdown>{text}</ReactMarkdown>
+      </TextContainer>
+      <Buttons>
+        <Link href={`notes/${id}`} passHref>
+          <Btn
+            color={foreColor}
+            onClick={() => {
+              dispatch(updateData(note));
+            }}
+            delete={false}
+          >
+            Change note
+          </Btn>
+        </Link>
         <Btn
           color={foreColor}
+          delete
           onClick={() => {
-            dispatch(updateData(note));
+            dispatch(setObject({ object: "note", id: id }));
+            dispatch(setModal("show"));
           }}
-          delete={false}
         >
-          Change note
+          Delete note
         </Btn>
-      </Link>
-      <Btn
-        color={foreColor}
-        delete
-        onClick={() => {
-          dispatch(setObject({ object: "note", id: id }));
-          dispatch(setModal("show"));
-        }}
-      >
-        Delete note
-      </Btn>
+      </Buttons>
     </Container>
   );
 };

@@ -25,3 +25,10 @@ button:focus {
 *:active::-webkit-slider-thumb {
   background-color: #aaa;
 }
+a{
+  text-decoration: none;
+  color: inherit;
+  filter: invert(100);
+  padding: 0 5px;
+  text-decoration: underline;
+}
