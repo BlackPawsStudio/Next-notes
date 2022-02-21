@@ -51,6 +51,8 @@ const Header = () => {
       deleteUser();
       dispatch(setModal("free"));
       dispatch(setObject({object: "none", id: NaN}));
+      localStorage.removeItem("next-notes-login");
+      localStorage.removeItem("next-notes-pass");
     }
   }, [state]);
   return (
@@ -83,6 +85,8 @@ const Header = () => {
                   <Button
                     onClick={() => {
                       dispatch(updateLogin({ id: NaN, login: "" }));
+                      localStorage.removeItem("next-notes-login");
+                      localStorage.removeItem("next-notes-pass");
                     }}
                   >
                     Log Out

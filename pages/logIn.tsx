@@ -31,7 +31,9 @@ const Initialization = () => {
       alert(result.message);
     } else {      
       dispatch(updateLogin({ id: result.id, login: result.login }));
-      dispatch(updateAll(result.prefs));
+      dispatch(updateAll(result.prefs));      
+      localStorage.setItem("next-notes-login", result.login);
+      localStorage.setItem("next-notes-pass", result.password);
       router.push("/notes");
     }
   };

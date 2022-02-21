@@ -14,9 +14,10 @@ export const Container = styled.div`
 `;
 
 export const Modal = styled.div`
-  width: 20vw;
+  width: 300px;
   height: 30vh;
   background-color: #ffffff;
+  box-shadow: 10px 10px #111;
   display: flex;
   align-items: center;
   justify-content: space-between;
