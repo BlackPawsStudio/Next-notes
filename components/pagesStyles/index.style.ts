@@ -9,10 +9,10 @@ export const TextContainer = styled.div`
   resize: none;
   padding: calc(1vw + 1vh);
   margin: 10px auto calc(1vw + 1vh);
-  font-size: 2vh;
+  font-size: 2.5vh;
   overflow: auto;
   & > * {
-    margin-bottom: 30px;
+    margin-bottom: 2vh;
   }
   & > h1,
   > h2,

@@ -109,9 +109,9 @@ export const Content = styled.div<{ focus }>`
   @media (max-width: 850px) {
     flex-direction: column;
     margin-top: 2vh;
-    width: fit-content;
+    width: 130px;
     padding: ${(props) => (props.focus ? "5px" : "0")};
-    height: ${(props) => (props.focus ? "calc(25vw + 25vh)" : "30px")};
+    height: ${(props) => (props.focus ? "calc(250px)" : "30px")};
     background-color: #111;
     overflow: hidden;
     padding-bottom: 10px;

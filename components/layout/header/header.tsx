@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { setModal, setObject } from "../../../redux/slices/modalSlice";
 import { updateLogin } from "../../../redux/slices/userSlice";
+import LangSwitch from "../../ui/langSwitch/langSwitch";
 import {
   AccountButtons,
   Button,
@@ -66,13 +67,11 @@ const Header = () => {
       <Link href="/" passHref>
         <Logo>Next notes</Logo>
       </Link>
-      <div
-        style={{ marginLeft: "auto", display: "flex" }}
-        onMouseEnter={() => setFocus(true)}
-        onMouseLeave={() => setFocus(false)}
-      >
         <Content focus={focus}>
-          <Burger focus={focus}></Burger>
+          <Burger
+            onClick={() => setFocus((prev) => !prev)}
+            focus={focus}
+          ></Burger>
 
           <nav>
             <Nav>
@@ -118,8 +117,8 @@ const Header = () => {
               </>
             )}
           </AccountButtons>
+          <LangSwitch />
         </Content>
-      </div>
     </Container>
   );
 };
