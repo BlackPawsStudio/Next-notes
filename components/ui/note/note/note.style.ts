@@ -111,11 +111,8 @@ export const TextContainer = styled.div<{ color }>`
   }
   & > p {
     & > img {
-      width: 100%;
+      max-width: 100%;
       transition: all 0.3s;
-      &:active {
-        width: 1000%;
-      }
     }
   }
   & > blockquote {

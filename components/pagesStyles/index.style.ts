@@ -10,4 +10,23 @@ export const TextContainer = styled.div`
   padding: calc(1vw + 1vh);
   margin: 10px auto calc(1vw + 1vh);
   font-size: 2vh;
+  overflow: auto;
+  & > * {
+    margin-bottom: 30px;
+  }
+  & > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    text-align: center;
+  }
+  & > ul,
+  ol {
+    list-style-position: inside;
+  }
+  & > p > a {
+    color: white;
+  }
 `;
