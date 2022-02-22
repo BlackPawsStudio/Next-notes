@@ -5,7 +5,7 @@ import Layout from "../components/layout/layout";
 import { store } from "../redux/store";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
       <Notifications />
@@ -18,6 +18,6 @@ function MyApp({ Component, pageProps }) {
       </Layout>
     </Provider>
   );
-}
+};
 
 export default MyApp;

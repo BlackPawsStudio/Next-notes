@@ -63,8 +63,9 @@ export const Additional = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 70px;
+  max-width: fit-content;
   height: 30px;
+  padding: 0 5px;
   border: 1px solid #111;
   background: none;
   box-shadow: 3px 3px #111;

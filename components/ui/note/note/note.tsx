@@ -37,6 +37,12 @@ const Note = ({ note, id }) => {
     }
   );
 
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
   const deleteNote = async (id) => {
     await fetch(`/api/notes?user=${userId}&note=${id}`, {
       method: "DELETE",
@@ -62,8 +68,10 @@ const Note = ({ note, id }) => {
             <TimeSeparator color={foreColor}></TimeSeparator>
             <Time color={foreColor}>{time}</Time>
           </>
-        ) : (
+        ) : lang === "en" ? (
           "Reminder disabled"
+        ) : (
+          "Уведомление выкл."
         )}
       </TimeContainer>
       <TextContainer color={foreColor}>
@@ -78,7 +86,7 @@ const Note = ({ note, id }) => {
             }}
             delete={false}
           >
-            Change note
+            {lang === "en" ? "Change note" : "Изменить"}
           </Btn>
         </Link>
         <Btn
@@ -89,7 +97,7 @@ const Note = ({ note, id }) => {
             dispatch(setModal("show"));
           }}
         >
-          Delete note
+          {lang === "en" ? "Delete note" : "Удалить"}
         </Btn>
       </Buttons>
     </Container>

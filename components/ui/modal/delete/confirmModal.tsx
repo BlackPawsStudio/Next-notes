@@ -10,6 +10,12 @@ const ConfirmModal = () => {
     };
   });
 
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
   const dispatch = useAppDispatch();
 
   return (
@@ -17,22 +23,22 @@ const ConfirmModal = () => {
       {state === "show" ? (
         <Container>
           <Modal>
-            <Text>Are you sure?</Text>
+            <Text>{lang === "en" ? "Are you sure?" : "Вы уверены?"}</Text>
             <Buttons>
               <Button
                 onClick={() => {
-                  dispatch(setModal("yes"));
+                  dispatch(setModal(lang === "en" ? "Yes" : "Да"));
                 }}
                 yes
               >
-                Yes
+                {lang === "en" ? "Yes" : "Да"}
               </Button>
               <Button
                 onClick={() => {
-                  dispatch(setModal("no"));
+                  dispatch(setModal(lang === "en" ? "No" : "Нет"));
                 }}
               >
-                No
+                {lang === "en" ? "No" : "Нет"}
               </Button>
             </Buttons>
           </Modal>

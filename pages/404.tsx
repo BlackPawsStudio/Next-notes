@@ -5,20 +5,27 @@ import {
   ErrorDescription,
   ErrorMessage,
 } from "../components/pagesStyles/404.style";
+import { useAppSelector } from "../redux/hooks";
 
 const NotFoundPage = () => {
   const router = useRouter();
 
+   const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+     return {
+       lang: toolkit.lang,
+     };
+   });
+
   return (
     <Container>
       <ErrorMessage>404</ErrorMessage>
-      <ErrorDescription>Your princess is in another castle :)</ErrorDescription>
+      <ErrorDescription>{lang === "en" ? "Your princess is in another castle :)" : "Кажется вы не туда попали)"}</ErrorDescription>
       <ErrorButton
         onClick={() => {
           router.back();
         }}
       >
-        Take me back
+        {lang === "en" ? "Take me back" : "Назад"}
       </ErrorButton>
     </Container>
   );

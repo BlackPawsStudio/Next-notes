@@ -6,6 +6,7 @@ import userSlice from "./slices/userSlice";
 import notificationSlice from "./slices/notificationSlice";
 import modalSlice from "./slices/modalSlice";
 import saverSlice from "./slices/saverSlice";
+import languageSlice from "./slices/languageSlice";
 
 const rootReducer = combineReducers({
   noteSlice: noteSlice,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   notificationSlice: notificationSlice,
   modalSlice: modalSlice,
   saverSlice: saverSlice,
+  languageSlice: languageSlice,
 });
 
 export const store = configureStore({

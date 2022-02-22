@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { updateText, updateTitle } from "../../redux/slices/prefsSlice";
 import {
   PreferenceSection,
@@ -9,12 +9,20 @@ import {
 } from "../pagesStyles/preferences.style";
 
 const TextSetup = ({ foreColor, title, text }) => {
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
   const dispatch = useAppDispatch();
 
   return (
     <PreferenceSection color={foreColor}>
       <PreferenceText>
-        <PreferenceTitle>Set default note title</PreferenceTitle>
+        <PreferenceTitle>
+          {lang === "en" ? "Set default note title" : "Заголовок по умолч."}
+        </PreferenceTitle>
         <PreferenceTextInput
           type="text"
           defaultValue={title}
@@ -26,7 +34,9 @@ const TextSetup = ({ foreColor, title, text }) => {
         />
       </PreferenceText>
       <PreferenceText>
-        <PreferenceTitle>Set default note text</PreferenceTitle>
+        <PreferenceTitle>
+          {lang === "en" ? "Set default note text" : "Текст по умолч."}
+        </PreferenceTitle>
         <PreferenceTextarea
           spellCheck={false}
           defaultValue={text}

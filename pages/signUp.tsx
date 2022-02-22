@@ -11,7 +11,7 @@ import {
   Modal,
   Title,
 } from "../components/pagesStyles/initialization.style";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setAlert } from "../redux/slices/modalSlice";
 import { updateAll } from "../redux/slices/prefsSlice";
 import { updateLogin } from "../redux/slices/userSlice";
@@ -21,6 +21,12 @@ const Initialization = () => {
   const [password, setPassword] = useState("");
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -46,14 +52,14 @@ const Initialization = () => {
   return (
     <Container>
       <Modal onSubmit={onSubmit}>
-        <Title>Sign in</Title>
+        <Title>{lang === "en" ? "Sign in" : "Регистрация"}</Title>
         <Inputs>
           <Input
             onChange={(e) => {
               setLogin(e.target.value);
             }}
             type="text"
-            placeholder="Login"
+            placeholder={lang === "en" ? "Login" : "Логин"}
             autoFocus={true}
             required
             minLength={2}
@@ -63,17 +69,17 @@ const Initialization = () => {
               setPassword(e.target.value);
             }}
             type="password"
-            placeholder="Password"
+            placeholder={lang === "en" ? "Password" : "Пароль"}
             required
             minLength={5}
           />
         </Inputs>
         <Buttons>
-          <Button>Confirm</Button>
+          <Button>{lang === "en" ? "Confirm" : "Подтвердить"}</Button>
           <Additional>
-            Already have an account?
+            {lang === "en" ? "Already have an account?" : "Уже есть аккаунт?"}
             <Link href="/logIn" passHref>
-              <Button>Log in</Button>
+              <Button>{lang === "en" ? "Log in" : "Войти"}</Button>
             </Link>
           </Additional>
         </Buttons>

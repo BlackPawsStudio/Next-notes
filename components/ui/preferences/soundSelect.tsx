@@ -1,13 +1,19 @@
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { updateSound } from "../../../redux/slices/prefsSlice";
 import { Container, Select } from "./soundSelect.style";
 
 const SoundSelect = ({ color, sound }) => {
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
   const dispatch = useAppDispatch();
 
   return (
     <Container color={color}>
-      Select notification sound
+      {lang === "en" ? "Select notification sound" : "Звук уведомления"}
       <Select
         defaultValue={sound}
         onChange={(e) => {

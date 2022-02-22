@@ -27,7 +27,7 @@ const Header = () => {
   const { state, object } = useAppSelector(({ modalSlice: toolkit }) => {
     return {
       state: toolkit.state,
-      object: toolkit.object
+      object: toolkit.object,
     };
   });
 
@@ -43,21 +43,27 @@ const Header = () => {
     console.log(message.message);
 
     dispatch(updateLogin({ id: NaN, login: "" }));
-    router.push('/')
+    router.push("/");
   };
+
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
 
   useEffect(() => {
     if (state === "yes" && object === "user") {
       deleteUser();
       dispatch(setModal("free"));
-      dispatch(setObject({object: "none", id: NaN}));
+      dispatch(setObject({ object: "none", id: NaN }));
       localStorage.removeItem("next-notes-login");
       localStorage.removeItem("next-notes-pass");
     }
   }, [state]);
   return (
     <Container>
-      <Link href="/notes" passHref>
+      <Link href="/" passHref>
         <Logo>Next notes</Logo>
       </Link>
       <div
@@ -71,10 +77,10 @@ const Header = () => {
           <nav>
             <Nav>
               <Link href="/notes" passHref>
-                <NavLink>All</NavLink>
+                <NavLink>{lang === "en" ? "All" : "Все"}</NavLink>
               </Link>
               <Link href="/preferences" passHref>
-                <NavLink>Prefs</NavLink>
+                <NavLink>{lang === "en" ? "Prefs" : "Настр."}</NavLink>
               </Link>
             </Nav>
           </nav>
@@ -89,25 +95,25 @@ const Header = () => {
                       localStorage.removeItem("next-notes-pass");
                     }}
                   >
-                    Log Out
+                    {lang === "en" ? "Log Out" : "Выйти"}
                   </Button>
                 </Link>
                 <Button
                   onClick={() => {
-                    dispatch(setObject({object: 'user'}))
+                    dispatch(setObject({ object: "user" }));
                     dispatch(setModal("show"));
                   }}
                 >
-                  Delete User
+                  {lang === "en" ? "Delete User" : "Удалить акк."}
                 </Button>
               </>
             ) : (
               <>
                 <Link href="/logIn" passHref>
-                  <Button>Log In</Button>
+                  <Button>{lang === "en" ? "Log In" : "Войти"}</Button>
                 </Link>
                 <Link href="/signUp" passHref>
-                  <Button>Sign Up</Button>
+                  <Button>{lang === "en" ? "Sign Up" : "Регистр."}</Button>
                 </Link>
               </>
             )}

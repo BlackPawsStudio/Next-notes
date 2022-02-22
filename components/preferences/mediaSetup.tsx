@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   Color,
   InputLabel,
@@ -10,13 +10,19 @@ import SoundSelect from "../ui/preferences/soundSelect";
 
 
 const MediaSetup = ({ foreColor, backColor, sound }) => {
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
   const dispatch = useAppDispatch();
 
   return (
     <PreferenceSection>
       <InputLabel isColor={true}>
         <InputLabelText color={foreColor}>
-          Set default background color
+          {lang === "en" ? "Set default back color" : "Цвет фона по умолч."}
         </InputLabelText>
         <Color
           editting={true}
@@ -29,7 +35,7 @@ const MediaSetup = ({ foreColor, backColor, sound }) => {
 
       <InputLabel isColor={true}>
         <InputLabelText color={foreColor}>
-          Set default text color
+          {lang === "en" ? "Set default text color" : "Цвет текста по умолч."}
         </InputLabelText>
         <Color
           editting={true}

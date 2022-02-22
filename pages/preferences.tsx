@@ -23,18 +23,28 @@ const PreferencesPage = () => {
     }
   );
 
-  const dispatch = useAppDispatch()
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    return (() => {
-      dispatch(setTarget("prefs"))
-    })
-  }, [])
+    return () => {
+      dispatch(setTarget("prefs"));
+    };
+  }, []);
 
   return (
     <Container>
       <Redirector />
-      <Title>Set up your default note</Title>
+      <Title>
+        {lang === "en"
+          ? "Set up your default note"
+          : "Настройте записку по умолчанию"}
+      </Title>
       <Content onMouseLeave={() => {}} backColor={backColor}>
         <MediaSetup foreColor={foreColor} backColor={backColor} sound={sound} />
         <TextSetup foreColor={foreColor} title={title} text={text} />

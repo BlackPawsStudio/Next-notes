@@ -35,7 +35,13 @@ const Note = () => {
       userId: toolkit.id,
     };
   });
-
+ 
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang
+    }
+ })
+  
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -80,8 +86,8 @@ const Note = () => {
       <Settings />
       <TimeAlert>
         {data.willRemind
-          ? `You will be reminded at ${data.time} ${data.date}`
-          : "Reminder disabled"}
+          ? `${lang === "en" ? "You will be reminded at" : "Вас уведомят в"} ${data.time} ${data.date}`
+          : lang === "en" ? "Reminder disabled" : "Напоминание выключено"}
       </TimeAlert>
       <TextField color={data.foreColor} prevText={data.text} />
     </Container>

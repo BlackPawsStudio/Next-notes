@@ -20,12 +20,17 @@ const Settings = () => {
         isEditting: toolkit.isEditting
       };
     });
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
   const dispatch = useAppDispatch();
 
   return (
     <Container color={backColor} editting={isEditting}>
       <InputLabel isColor={true}>
-        <InputLabelText>Change background color</InputLabelText>
+        <InputLabelText>{lang === "en" ? "Change background color" : "Изменить цвет фона"}</InputLabelText>
         <Color
           editting={isEditting}
           disabled={!isEditting}
@@ -35,7 +40,7 @@ const Settings = () => {
         />
       </InputLabel>
       <InputLabel isColor={true}>
-        <InputLabelText>Change text color</InputLabelText>
+        <InputLabelText>{lang === "en" ? "Change text color" : "Изменить цвет текста"}</InputLabelText>
         <Color
           editting={isEditting}
           disabled={!isEditting}

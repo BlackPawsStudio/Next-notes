@@ -6,10 +6,15 @@ import { updateAll } from "../../redux/slices/prefsSlice";
 import { updateLogin } from "../../redux/slices/userSlice";
 
 const Redirector = () => {
-  const { id, login } = useAppSelector(({ userSlice: toolkit }) => {
+  const { login } = useAppSelector(({ userSlice: toolkit }) => {
     return {
-      id: toolkit.id,
       login: toolkit.login,
+    };
+  });
+
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
     };
   });
 
@@ -17,9 +22,7 @@ const Redirector = () => {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    console.log(router.locales);
-    
+  useEffect(() => {       
     const checkLogged = async () => {
       if (login === "") {
         const userLogin = localStorage.getItem("next-notes-login");
@@ -30,16 +33,14 @@ const Redirector = () => {
           );
           const result = await response.json();
           if (result.message) {
-            dispatch(setModal("alert"))
-            alert(result.message);
+            dispatch(setAlert(result.message));
           } else {
             dispatch(updateLogin({ id: result.id, login: result.login }));
             dispatch(updateAll(result.prefs));
             router.push("/notes");
           }
         } else {
-          dispatch(setAlert("Log in first"))
-          // alert("Log in first!");
+          dispatch(setAlert(lang === "en" ? "Log in first" : "Сперва войдите"))
           router.push("/logIn");
         }
       }

@@ -39,14 +39,18 @@ const AllNotesPage = () => {
   });
 
   const dispatch = useAppDispatch();
+  
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
 
   useEffect(() => {
     const getAllNotes = async () => {
-      const response = await fetch(
-        `/api/notes/?user=${id}`
-      );
+      const response = await fetch(`/api/notes/?user=${id}`);
       const result = await response.json();
-      const notes:Array<NoteType> = Object.values(result)
+      const notes: Array<NoteType> = Object.values(result);
       setAllNotes(notes ? notes : []);
 
       if (notes) {
@@ -71,11 +75,11 @@ const AllNotesPage = () => {
     };
     getAllNotes();
   }, [amount, dispatch, id]);
-  
+
   return (
     <Container>
       <Redirector />
-      <Title>Your all notes</Title>
+      <Title>{lang === "en" ? "Your all notes" : "Все ваши записки"}</Title>
       <NoteContainer>
         {typeof allNotes === "string"
           ? allNotes

@@ -15,16 +15,23 @@ import {
 } from "./timeSettings.style";
 
 const TimeSettings = () => {
-  const { foreColor, date, time, willRemind } =
-    useAppSelector(({ noteSlice: toolkit }) => {
+  const { foreColor, date, time, willRemind } = useAppSelector(
+    ({ noteSlice: toolkit }) => {
       return {
         foreColor: toolkit.foreColor,
         date: toolkit.date,
         time: toolkit.time,
         willRemind: toolkit.willRemind,
       };
-    });
-  
+    }
+  );
+
+  const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
+    return {
+      lang: toolkit.lang,
+    };
+  });
+
   const dispatch = useAppDispatch();
 
   const checkTime = ({ target }, isHour) => {
@@ -58,7 +65,7 @@ const TimeSettings = () => {
   return (
     <InputLabel isColor={false}>
       <ReminderSetup>
-        <InputLabelText>Date</InputLabelText>
+        <InputLabelText>{lang === "en" ? "Date" : "Дата"}</InputLabelText>
         <Date
           type="date"
           defaultValue={date}
@@ -69,7 +76,7 @@ const TimeSettings = () => {
         />
       </ReminderSetup>
       <ReminderSetup>
-        <InputLabelText>Time</InputLabelText>
+        <InputLabelText>{lang === "en" ? "Time" : "Время"}</InputLabelText>
         <Time>
           <TimeInput
             type="number"
@@ -100,7 +107,7 @@ const TimeSettings = () => {
           }}
           checked={willRemind}
         />
-        Set reminder?
+        {lang === "en" ? "Set reminder?" : "Вкл. уведомление?"}
       </Reminder>
     </InputLabel>
   );
