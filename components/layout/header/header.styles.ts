@@ -111,7 +111,7 @@ export const Content = styled.div<{ focus }>`
     margin-top: 2vh;
     width: 130px;
     padding: ${(props) => (props.focus ? "5px" : "0")};
-    height: ${(props) => (props.focus ? "calc(250px)" : "30px")};
+    height: ${(props) => (props.focus ? "330px" : "30px")};
     background-color: #111;
     overflow: hidden;
     padding-bottom: 10px;

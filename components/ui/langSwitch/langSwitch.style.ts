@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Switch = styled.div`
   position: relative;
   width: 7vw;
-  min-width: 50px;
+  min-width: 100px;
   height: 7vh;
   background-color: #ffffff;
 `;
