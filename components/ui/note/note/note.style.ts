@@ -69,7 +69,7 @@ export const Buttons = styled.div`
   left: 0;
 `
 
-export const Btn = styled.button<{ delete; color }>`
+export const Btn = styled.button<{ delete?; color }>`
   width: 100%;
   height: 50%;
   background-color: #ffffff40;

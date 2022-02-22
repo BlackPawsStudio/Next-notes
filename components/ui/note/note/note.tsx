@@ -84,7 +84,6 @@ const Note = ({ note, id }) => {
             onClick={() => {
               dispatch(updateData(note));
             }}
-            delete={false}
           >
             {lang === "en" ? "Change note" : "Изменить"}
           </Btn>

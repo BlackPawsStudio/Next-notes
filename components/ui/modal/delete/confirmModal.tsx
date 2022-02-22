@@ -27,7 +27,7 @@ const ConfirmModal = () => {
             <Buttons>
               <Button
                 onClick={() => {
-                  dispatch(setModal(lang === "en" ? "Yes" : "Да"));
+                  dispatch(setModal("yes"));
                 }}
                 yes
               >
@@ -35,7 +35,7 @@ const ConfirmModal = () => {
               </Button>
               <Button
                 onClick={() => {
-                  dispatch(setModal(lang === "en" ? "No" : "Нет"));
+                  dispatch(setModal("no"));
                 }}
               >
                 {lang === "en" ? "No" : "Нет"}
