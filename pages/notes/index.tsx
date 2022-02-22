@@ -60,6 +60,7 @@ const AllNotesPage = () => {
           setNotifications(
             noted.map((el) => {
               return {
+                title: el.title,
                 time: el.time,
                 date: el.date,
               };

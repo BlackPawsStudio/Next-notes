@@ -12,6 +12,7 @@ import {
   Title,
 } from "../components/pagesStyles/initialization.style";
 import { useAppDispatch } from "../redux/hooks";
+import { setAlert } from "../redux/slices/modalSlice";
 import { updateAll } from "../redux/slices/prefsSlice";
 import { updateLogin } from "../redux/slices/userSlice";
 
@@ -33,7 +34,7 @@ const Initialization = () => {
     console.log(result);
     
     if (result.message) {
-      alert(result.message);
+      dispatch(setAlert(result.message));
     } else {
       dispatch(updateLogin({ id: result.id, login: result.login }));
       dispatch(updateAll(result.prefs));

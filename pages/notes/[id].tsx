@@ -15,8 +15,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setTitle, updateData } from "../../redux/slices/noteSlice";
 import { setTarget } from "../../redux/slices/saverSlice";
 
-interface Note {}
-
 const Note = () => {
   const data = useAppSelector(({ noteSlice: toolkit }) => {
     return {

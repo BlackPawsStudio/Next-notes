@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setAlert, setModal } from "../../redux/slices/modalSlice";
 import { updateAll } from "../../redux/slices/prefsSlice";
 import { updateLogin } from "../../redux/slices/userSlice";
 
 const Redirector = () => {
-  const { login } = useAppSelector(({ userSlice: toolkit }) => {
+  const { id, login } = useAppSelector(({ userSlice: toolkit }) => {
     return {
+      id: toolkit.id,
       login: toolkit.login,
     };
   });
@@ -16,6 +18,8 @@ const Redirector = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log(router.locales);
+    
     const checkLogged = async () => {
       if (login === "") {
         const userLogin = localStorage.getItem("next-notes-login");
@@ -26,6 +30,7 @@ const Redirector = () => {
           );
           const result = await response.json();
           if (result.message) {
+            dispatch(setModal("alert"))
             alert(result.message);
           } else {
             dispatch(updateLogin({ id: result.id, login: result.login }));
@@ -33,14 +38,14 @@ const Redirector = () => {
             router.push("/notes");
           }
         } else {
-          alert("Log in first!");
+          dispatch(setAlert("Log in first"))
+          // alert("Log in first!");
           router.push("/logIn");
         }
       }
     }
     checkLogged();
   }, []);
-
   return <></>;
 };
 

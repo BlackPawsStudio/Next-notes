@@ -6,6 +6,7 @@ const modalSlice = createSlice({
     id: NaN,
     object: "none",
     state: "free",
+    message: '',
   },
   reducers: {
     setModal(state, { payload }) {
@@ -14,9 +15,13 @@ const modalSlice = createSlice({
     setObject(state, { payload }) {
       state.object = payload.object;
       state.id = payload.id
+    },
+    setAlert(state, { payload }) {
+      state.state = 'alert';
+      state.message = payload
     }
   },
 });
 
 export default modalSlice.reducer;
-export const { setModal, setObject } = modalSlice.actions;
+export const { setModal, setObject, setAlert } = modalSlice.actions;

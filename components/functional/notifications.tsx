@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import {
-  getCurrentDate,
-  getTimeAhead,
-} from "../../functions/timeFunctions";
-import { useAppSelector } from "../../redux/hooks";
+import { getCurrentDate, getTimeAhead } from "../../functions/timeFunctions";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setAlert } from "../../redux/slices/modalSlice";
+import SystemNotification from "./systemNotification";
 
 const Notifications = () => {
   const [alerts, setAlerts] = useState([]);
@@ -20,6 +19,8 @@ const Notifications = () => {
     };
   });
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     Object.values(alerts).forEach((el) => {
       clearTimeout(el);
@@ -27,25 +28,25 @@ const Notifications = () => {
 
     notifications.forEach((notification) => {
       const timeAhead = getTimeAhead(notification.time);
-      if (
-        getCurrentDate() === notification.date &&
-        timeAhead > -60000 
-      ) {
+      if (getCurrentDate() === notification.date && timeAhead > -60000) {
         setAlerts((prev) => {
           const alarm = new Audio(`../sounds/${sound}.mp3`);
           prev[notification.id] = setTimeout(() => {
-            alarm.play()
-            alert('notification')
-            notification.time;
+            dispatch(setAlert(`${notification.title} note is alerting!`));
+            alarm.play();
           }, timeAhead);
-          console.log('time', timeAhead);          
+          console.log("time", timeAhead);
           return prev;
         });
       }
     });
   }, [notifications]);
 
-  return <></>;
+  return (
+    <>
+      <SystemNotification />
+    </>
+  );
 };
 
 export default Notifications;

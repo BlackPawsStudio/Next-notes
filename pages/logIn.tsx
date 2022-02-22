@@ -14,6 +14,7 @@ import {
 import { useAppDispatch } from "../redux/hooks";
 import { updateLogin } from "../redux/slices/userSlice";
 import { updateAll } from "../redux/slices/prefsSlice";
+import { setAlert } from "../redux/slices/modalSlice";
 
 const Initialization = () => {
   const [login, setLogin] = useState("");
@@ -28,7 +29,7 @@ const Initialization = () => {
     const response = await fetch(`/api/users?login=${login}&password=${password}`);
     const result = await response.json();
     if (result.message) {      
-      alert(result.message);
+      dispatch(setAlert(result.message));
     } else {      
       dispatch(updateLogin({ id: result.id, login: result.login }));
       dispatch(updateAll(result.prefs));      

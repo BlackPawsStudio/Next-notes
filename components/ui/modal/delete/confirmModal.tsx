@@ -1,6 +1,7 @@
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { setModal } from "../../../redux/slices/modalSlice";
-import { Button, Buttons, Container, Modal, Text } from "./confirmModal.style";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { setModal } from "../../../../redux/slices/modalSlice";
+import { Button, Buttons } from "./confirmModal.style";
+import { Container, Modal, Text } from "../modal.style";
 
 const ConfirmModal = () => {
   const { state } = useAppSelector(({ modalSlice: toolkit }) => {
