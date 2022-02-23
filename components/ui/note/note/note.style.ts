@@ -114,6 +114,13 @@ export const TextContainer = styled.div<{ color }>`
       max-width: 100%;
       transition: all 0.3s;
     }
+    & > code {
+      overflow-x: auto;
+      background-color: #00000033;
+      padding: 3px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
   }
   & > blockquote {
     border-left: 5px solid #00000066;

@@ -1,0 +1,132 @@
+{
+  "users" : [ {
+    "id" : 0,
+    "login" : "admin",
+    "notes" : [ null, null, {
+      "backColor" : "#0d680e",
+      "date" : "2022-02-22",
+      "foreColor" : "#e1ff00",
+      "id" : 2,
+      "isEditting" : false,
+      "text" : "### DUNGEON CARDS GAME\n\nThis is an adaptation of android game [Dungeon cards](https://play.google.com/store/apps/details?id=com.The717pixels.DungeonCards&hl=ru&gl=US) and implementation of autoplay algorithm.\n\nHere you play as a brave knight fighting against monsters. You can walk horizontally and vertically only to the closest cards.\nIf you tap on a monster, you will lose as much hp as the monster has.\nIf you tap on a health potion, you will recieve as much hp as the potion has.\nYou must keep your health above 0 or you will lose!\n\nYou can press `Enable auto play` button to make computer play instead of you and then press again to disable algorithm\n\n![image](https://res.cloudinary.com/dkfwehxio/image/upload/v1640197618/Screenshot_2021-12-22_212625_vmwiqm.png)\n\nYou can try this game yourself in [application demo](https://blackpawsstudio.github.io/Dominoes-tech-challenge/)!\n\n### SETUP and USAGE\n\nThe steps below will take you through cloning your own fork, installing dependencies and building:\n\n1. Fork and/or clone this repository. To use Git from command line, see the [Setting up Git](https://help.github.com/articles/set-up-git/) and [Fork repo](https://help.github.com/articles/fork-a-repo/) articles.\n\n```bash\ngit clone https://github.com/BlackPawsStudio/Dungeon-cards/\n```\n\n2. Open your copied repo folder in terminal and install necessary modules with command, make sure that you have installed [npm](https://www.npmjs.com/get-npm):\n\n```bash\nnpm install\n```\n\n3. Now you are able to run or build the project:\n\nTo run the project write `npm run` in terminal and live development server will open.\n\nRun `npm run build` to build the project. The build files will be stored in the `dist/` directory. \nYou can go to the `dist/` directory and open `index.html` file to see the results.",
+      "time" : "11:48",
+      "title" : "readme.md",
+      "willRemind" : false
+    }, {
+      "backColor" : "#aaaaaa",
+      "date" : "2022-02-24",
+      "foreColor" : "#111111",
+      "id" : 3,
+      "isEditting" : false,
+      "text" : "Drive lesson",
+      "time" : "13:00",
+      "title" : "Friday plans",
+      "willRemind" : true
+    }, {
+      "backColor" : "#aaaaaa",
+      "date" : "2022-02-23",
+      "foreColor" : "#111111",
+      "id" : 4,
+      "isEditting" : false,
+      "text" : "- спросить про 8 марта",
+      "time" : "01:05",
+      "title" : "завтра",
+      "willRemind" : false
+    }, {
+      "backColor" : "#aaaaaa",
+      "date" : "2022-03-18",
+      "foreColor" : "#111111",
+      "id" : 5,
+      "isEditting" : false,
+      "text" : "",
+      "time" : "15:00",
+      "title" : "выпить девит",
+      "willRemind" : true
+    }, {
+      "backColor" : "#066a1a",
+      "date" : "2022-02-23",
+      "foreColor" : "#00e1ff",
+      "id" : 6,
+      "text" : "",
+      "time" : "11:32",
+      "title" : "",
+      "willRemind" : false
+    } ],
+    "password" : "53465134s",
+    "prefs" : {
+      "backColor" : "#066a1a",
+      "foreColor" : "#00e1ff",
+      "id" : 0,
+      "sound" : "1",
+      "text" : "",
+      "title" : ""
+    }
+  }, {
+    "id" : 1,
+    "login" : "ArtCop",
+    "notes" : [ {
+      "backColor" : "#db4385",
+      "date" : "2022-02-21",
+      "foreColor" : "#6f47ff",
+      "id" : 0,
+      "isEditting" : false,
+      "text" : "ПОРА СМОТРЕТЬ СТРИМ!!!!\n",
+      "time" : "17:30",
+      "title" : "ВРЕМЯ СТРИМА!",
+      "willRemind" : true
+    } ],
+    "password" : "artcop",
+    "prefs" : {
+      "backColor" : "#aaaaaa",
+      "foreColor" : "#111111",
+      "id" : 1,
+      "sound" : "6",
+      "text" : "Write here!",
+      "title" : "Note title"
+    }
+  }, {
+    "id" : 2,
+    "login" : "Крысюк",
+    "notes" : [ {
+      "backColor" : "#aaaaaa",
+      "date" : "2022-02-22",
+      "foreColor" : "#111111",
+      "id" : 0,
+      "isEditting" : false,
+      "text" : "мелко\n",
+      "time" : "00:43",
+      "title" : "Кошк глп",
+      "willRemind" : false
+    } ],
+    "password" : "1234567890",
+    "prefs" : {
+      "backColor" : "#aaaaaa",
+      "foreColor" : "#111111",
+      "sound" : 1,
+      "text" : "Write here!",
+      "title" : "Note title"
+    }
+  }, {
+    "id" : 3,
+    "login" : "qwe",
+    "notes" : [ {
+      "backColor" : "#c4bd2f",
+      "date" : "2022-02-23",
+      "foreColor" : "#111111",
+      "id" : 0,
+      "isEditting" : true,
+      "text" : "Write here!",
+      "time" : "03:15",
+      "title" : "Note title",
+      "willRemind" : false
+    } ],
+    "password" : "1029384756",
+    "prefs" : {
+      "backColor" : "#aaaaaa",
+      "foreColor" : "#111111",
+      "sound" : 1,
+      "text" : "Write here!",
+      "title" : "Note title"
+    }
+  } ]
+}
