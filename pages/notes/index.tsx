@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
-import Note from "../../components/ui/note/note/note";
-import NewNote from "../../components/ui/newNote/newNote";
-import {
-  Container,
-  NoteContainer,
-  Title,
-} from "../../components/pagesStyles/allNotes.style";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import Redirector from "../../components/functional/redirector";
-import { setNotifications } from "../../redux/slices/notificationSlice";
-import { setTarget } from "../../redux/slices/saverSlice";
+import { useEffect, useState } from 'react';
+import Note from '../../components/ui/note/note/note';
+import NewNote from '../../components/ui/newNote/newNote';
+import { Container, NoteContainer, Title } from '../../components/pagesStyles/allNotes.style';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import Redirector from '../../components/functional/redirector';
+import { setNotifications } from '../../redux/slices/notificationSlice';
+import { setTarget } from '../../redux/slices/saverSlice';
 
 type NoteType = {
   title: string;
@@ -39,7 +35,7 @@ const AllNotesPage = () => {
   });
 
   const dispatch = useAppDispatch();
-  
+
   const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
     return {
       lang: toolkit.lang,
@@ -79,14 +75,19 @@ const AllNotesPage = () => {
   return (
     <Container>
       <Redirector />
-      <Title>{lang === "en" ? "Your all notes" : "Все ваши записки"}</Title>
+      <Title>{lang === 'en' ? 'Your all notes' : 'Все ваши записки'}</Title>
       <NoteContainer>
-        {typeof allNotes === "string"
-          ? allNotes
-          : allNotes.map((el) =>
-              el ? <Note key={el.id} id={el.id} note={el}></Note> : ""
-            )}
-        <NewNote oldData={allNotes} />
+        {allNotes.length ? (
+          typeof allNotes === 'string' ? (
+            allNotes
+          ) : (
+            allNotes.map((el) => (el ? <Note key={el.id} id={el.id} note={el}></Note> : ''))
+          )
+        ) : (
+            // add spinner
+          <>Please wait, loading...</>
+        )}
+        {allNotes.length ? <NewNote oldData={allNotes} /> : <></>}
       </NoteContainer>
     </Container>
   );

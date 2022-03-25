@@ -36,17 +36,6 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
 
-  const deleteUser = async () => {
-    const result = await fetch(`/api/users/?id=${id}`, {
-      method: "DELETE",
-    });
-    const message = await result.json();
-    console.log(message.message);
-
-    dispatch(updateLogin({ id: NaN, login: "" }));
-    router.push("/");
-  };
-
   const { lang } = useAppSelector(({ languageSlice: toolkit }) => {
     return {
       lang: toolkit.lang,
@@ -54,6 +43,17 @@ const Header = () => {
   });
 
   useEffect(() => {
+    const deleteUser = async () => {
+      const result = await fetch(`/api/users/?id=${id}`, {
+        method: 'DELETE',
+      });
+      const message = await result.json();
+      console.log(message.message);
+
+      dispatch(updateLogin({ id: NaN, login: '' }));
+      router.push('/');
+    };
+
     if (state === "yes" && object === "user") {
       deleteUser();
       dispatch(setModal("free"));
@@ -61,7 +61,7 @@ const Header = () => {
       localStorage.removeItem("next-notes-login");
       localStorage.removeItem("next-notes-pass");
     }
-  }, [state]);
+  }, [state, id, router, dispatch, object]);
   return (
     <Container>
       <Link href="/" passHref>
