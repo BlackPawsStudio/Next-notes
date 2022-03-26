@@ -14,7 +14,7 @@ const handler = async (req, res) => {
         `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users/${data.user}/notes.json`
       );
       const notes = await response.json();
-      res.status(200).json(notes ? notes : []);
+      res.status(200).json(notes ? notes : [null]);
       console.log(`${data.user} requested all notes`);
     }
   }
