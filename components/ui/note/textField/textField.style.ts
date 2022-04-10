@@ -12,5 +12,4 @@ export const TextContainer = styled.textarea.attrs(({ color }) => ({
   resize: none;
   padding: calc(1vw + 1vh);
   margin: 10px auto calc(1vw + 1vh);
-  font-size: 2vh;
 `;
