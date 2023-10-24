@@ -4,9 +4,24 @@ const handler = async (req, res) => {
     "https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json"
   );
   const result = await response.json();
-  
+
   const allUsers = result
-    ? result.map((el) => {
+    ? (
+        Object.values(result) as [
+          {
+            id: number;
+            login: string;
+            password: string;
+            prefs: {
+              title: string;
+              backColor: string;
+              foreColor: string;
+              text: string;
+              sound: number;
+            };
+          }
+        ]
+      ).map((el) => {
         return {
           id: el.id,
           login: el.login,
@@ -43,7 +58,7 @@ const handler = async (req, res) => {
       }
     });
 
-    console.log("Sign in result", isTaken ? 'account taken' : "Not found");
+    console.log("Sign in result", isTaken ? "account taken" : "Not found");
 
     if (!isTaken) {
       if (result) {
@@ -85,25 +100,27 @@ const handler = async (req, res) => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({0: {
-              id: 0,
-              login: data.login,
-              password: data.password,
-              prefs: {
-                title: "Note title",
-                backColor: "#aaaaaa",
-                foreColor: "#111111",
-                text: "Write here!",
-                sound: 1,
+            body: JSON.stringify({
+              0: {
+                id: 0,
+                login: data.login,
+                password: data.password,
+                prefs: {
+                  title: "Note title",
+                  backColor: "#aaaaaa",
+                  foreColor: "#111111",
+                  text: "Write here!",
+                  sound: 1,
+                },
               },
-            }}),
+            }),
           }
         );
         res.status(201).json();
       }
     } else {
       res.status(500).json({ message: "This login is already taken" });
-      console.log('Tried to enter taken account');
+      console.log("Tried to enter taken account");
     }
   }
 
@@ -117,7 +134,6 @@ const handler = async (req, res) => {
     );
     res.status(200).json({ message: "success" });
     console.log(`${userId} deleted account`);
-    
   }
 };
 
