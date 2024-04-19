@@ -61,8 +61,8 @@ const handler = async (req, res) => {
     console.log("Sign in result", isTaken ? "account taken" : "Not found");
 
     if (!isTaken) {
-      if (result) {
-        result.push({
+      if (allUsers) {
+        allUsers.push({
           id: 0,
           login: data.login,
           password: data.password,
@@ -83,15 +83,15 @@ const handler = async (req, res) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(
-              result.map((el, id) => {
+              allUsers.map((el, id) => {
                 if (el) el.id = id;
                 return el;
               })
             ),
           }
         );
-        res.status(201).json(result[result.length - 1]);
-        console.log(`${result[result.length - 1].login} created account`);
+        res.status(201).json(allUsers[allUsers.length - 1]);
+        console.log(`${allUsers[allUsers.length - 1].login} created account`);
       } else {
         await fetch(
           `https://next-notes-9eabe-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
